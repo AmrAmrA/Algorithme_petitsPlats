@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Les petits plats</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
-<body class="bg-dark">
-    <img src="Vector.png" class="mx-auto d-block pt-5 pb-3" alt="Logo en forme de toque de chef">
-    <h1 class='text-danger text-center text-xl pb-5 fs-1 fw-semibold'>Les petits plats</h1>
+
+<body>
+    <header>
+        <img src="Vector.png" alt="Logo rouge sur blanc en forme de toque de cuisinier">
+        <h1>Les petits plats</h1>
+    </header>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <section class="query__section">
+        <form action="" method="post">
+            <input type="text" id="query__input" name="query__input" class="query__input" placeholder="Rechercher une recette">
+            <i class="fa-solid fa-magnifying-glass fa-xl query__icon"></i>
+        </form>
+    </section>
+
+    <main>
+        <article class="recipe__card">
+            <div class="fake__image"></div>
+            <div class="recipe__body">
+                <div class="recipe__header">
+                    <h5 class="recipe__title">Limonade de coco</h5>
+                    <h5 class="recipe__time">10 min</h5>
+                </div>
+                 <div class="recipe__preparation">
+                    <ul>
+                        <li>Lait de coco : 400ml</li>
+                        <li>Lait de coco : 400ml</li>
+                        <li>Lait de coco : 400ml</li>
+                        <li>Lait de coco : 400ml</li>
+                        <li>Lait de coco : 400ml</li>
+                    </ul>
+                    <p class="recipe__ingredients">
+                        Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée.
+                    </p>
+                 </div>
+            </div>
+        </article>
+    </main>
 </body>
+    <script src="app.js"></script>
 </html>
