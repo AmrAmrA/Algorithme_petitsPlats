@@ -26,8 +26,13 @@ displayInformations().then((data) => {
             <div class = "recipe__preparation">
              <ul>
                 ${data.recipes[i].ingredients.map(ingredient =>  
-                    `<li>  ${ingredient.ingredient}  ${ingredient.quantity} ${ingredient.unit} </li>`) 
-                    .join('')}
+                    `<li>  
+                     <span class = "ingredient__name">  ${ingredient.ingredient} : </span>   
+                    <span> ${ingredient.quantity ? ingredient.quantity : ""} </span> 
+                    <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
+                    </li>`) 
+                    .join('')
+                }
                 
              </ul>
              <p class = "recipe__ingredients">

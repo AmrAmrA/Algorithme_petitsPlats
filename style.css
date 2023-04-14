@@ -1,4 +1,7 @@
 /* --------Reset CSS--------- */
+body {
+  overflow-x: hidden;
+}
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
@@ -28,12 +31,13 @@
   /* Queries section */
   .query__section {
     position: relative;
+    margin: 0 5px;
   }
 
   .query__input {
     background-color: #E7E7E7;
     border-radius: 5px;
-    width: 82%;
+    width: 84%;
     height: 60px;
     display: block;
     margin: 20px auto;
@@ -54,18 +58,20 @@
 
   main {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    margin: 20px 40px;
+    max-width: 1500px;
+    margin: 0 -7px;
   }
 
 
   .recipe__card {
-    padding: 20px;
-    margin: 10px 0px;
+    padding: 5px;
+    margin: 10px 7px;
+    width: 27.1%;
   }
   .fake__image {
-    width: 410px;
-    height: 170px;
+    height: 175px;
     background-color: #C7BEBE;
     border-radius: 5px 5px 0px 0px;
   }
@@ -77,13 +83,16 @@
     font-size: 18px;
     display: flex;
     align-items: center;
+    font-family: 'Lato', 'sans-serif';
+  }
+  .recipe__time {
+    font-weight: 700;
   }
   .recipe__clock {
    margin-right: 8px;
   }
   .recipe__body {
-    height: 283px;
-    width: 410px;
+    height: 275px;
     background-color: #E7E7E7;
     border-radius: 0px 0px 5px 5px;
     padding: 5px 10px 0px 10px;
@@ -103,15 +112,40 @@
     font-family: 'Lato', 'sans-serif';
     font-weight: 400;
     margin-right: 20px;
+    font-size: 12px;
+    line-height: 14px;
   }
   .recipe__ingredients {
     flex: 1;
     font-size: 12px;
-    line-height: 19px;
+    line-height: 12px;
     font-family: 'Roboto', 'sans-serif';
+    font-weight: 400;
     text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+  .ingredient__name {
+    font-weight: 700;
+  }
+
+
+
+
+
+
+
+
+  /* ------------- Responsive -------------*/
+  @media screen and (max-width: 800px) {
+    .recipe__card {
+      width: 40.5%;
+    }
+  }
+  @media screen and (max-width: 580px) {
+    .recipe__card {
+      width: 80%;
+    }
   }
