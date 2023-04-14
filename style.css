@@ -54,6 +54,45 @@ body {
     padding-right: 15px;
   }
 
+
+  /* ------------ Buttons range ----------------*/
+  .buttons__range {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 0px 0px 8.2%;;
+  }
+  .recipe__button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+  }
+
+  .text__button {
+    font-family: 'Lato', 'sans-serif';
+    color: aliceblue;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .ingredient__button {
+    background-color: #3282F7;
+  }
+  .devices__button {
+    background-color: #68D9A4;
+  }
+  .tools__button {
+    background-color: #ED6454;
+  }
+
+  .fa-chevron-down {
+    color: aliceblue;
+  }
+
   /* -------Recipes Card-------- */
 
   main {
@@ -139,13 +178,23 @@ body {
 
 
   /* ------------- Responsive -------------*/
-  @media screen and (max-width: 800px) {
+
+      /* ------ Range Buttons ------  */
+      @media screen and (max-width: 404px) {
+        .recipe__button {
+          width: 200px;
+        }
+      }
+
+
+     /* ------ Recipe Cards ------  */
+  @media screen and (max-width: 860px) {
     .recipe__card {
       width: 40.5%;
     }
   }
   @media screen and (max-width: 580px) {
     .recipe__card {
-      width: 80%;
+      width: 83%;
     }
   }
