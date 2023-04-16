@@ -59,7 +59,7 @@ body {
   .buttons__range {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px 0px 0px 8.2%;;
+    margin: 50px 0px 0px 8.2%;
   }
   .recipe__button {
     display: flex;
@@ -70,6 +70,7 @@ body {
     width: 170px;
     height: 69px;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .text__button {
@@ -91,6 +92,34 @@ body {
 
   .fa-chevron-down {
     color: aliceblue;
+  }
+
+  .ingredient__input {
+    background-color: #3282F7;
+    color: #FFFFFF;
+    border: none; 
+    outline: none;
+    font-size: 18px;
+  }
+  .ingredient__button {
+    width: 50%;
+  }
+
+  .newList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 680px;
+    background-color: #3282F7;
+    color: #FFFFFF;
+    font-family: 'Lato', 'sans-serif';
+    z-index: 3;
+    position: absolute;
+    margin-left: 8%;
+    margin-top: -1.2%;
+  }
+
+  .newList li {
+    margin: 10px 5px;
   }
 
   /* -------Recipes Card-------- */

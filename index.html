@@ -30,8 +30,10 @@
     </section>
     <section class="buttons__range">
         <div class="ingredient__button recipe__button">
-            <p class="text__button">Ingredients</p>
-            <i class="fa-solid fa-chevron-down"></i>
+            <p class="text__button" style="display: none">Ingredients</p>
+            <input type="text" id="ingredient__input" name="ingredient__input" class="ingredient__input" placeholder="Rechercher un ingrédient">
+            <i class="fa-solid fa-chevron-down" style="display: none"></i>
+            <i class="fa-solid fa-chevron-up"></i>
         </div>
         <div class="devices__button recipe__button">
             <p class="text__button">Appareils</p>
@@ -42,6 +44,7 @@
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </section>
+    <ul class="newList"></ul>
     <main>
     </main>
 </body>

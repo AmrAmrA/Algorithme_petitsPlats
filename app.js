@@ -11,9 +11,9 @@ async function displayInformations() {
 }
 
 displayInformations().then((data) => {
+    console.log(data.recipes);
     for(let i = 0; i < data.recipes.length; i++) {
-        console.log(data.recipes[i].ingredients);
-        const article = document.createElement('article');
+        const article = document.createElement('article');          
         article.classList.add('recipe__card')
         main.appendChild(article)
         article.innerHTML = `
@@ -43,3 +43,15 @@ displayInformations().then((data) => {
         `
     }
 })
+
+const newlist = document.querySelector('.newList')
+function displayIngredients() {
+    const ingredients = document.querySelectorAll('.ingredient__name')
+    ingredients.forEach(ingredient => {
+            // console.log(ingredient.textContent);
+            const newItem= document.createElement('li')
+            newItem.textContent = ingredient.textContent
+            newlist.appendChild(newItem)
+        })
+    }
+setTimeout(displayIngredients, 200)
