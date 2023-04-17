@@ -108,8 +108,8 @@ body {
   .newList {
     display: flex;
     flex-direction: column;
-    height: 3000px;
-    width: 800px;
+    height: 1700px;
+    width: 685px;
     flex-wrap: wrap;
     background-color: #3282F7;
     color: #FFFFFF;

@@ -11,7 +11,6 @@ async function displayInformations() {
 }
 
 displayInformations().then((data) => {
-  console.log(data.recipes);
   for (let i = 0; i < data.recipes.length; i++) {
     const article = document.createElement("article");
     article.classList.add("recipe__card");
@@ -51,31 +50,26 @@ displayInformations().then((data) => {
         `;
   }
 });
+
 const emptyArray = [];
 const newlist = document.querySelector(".newList");
-
-
-
 function displayIngredients() {
-    const ingredients = document.querySelectorAll(".ingredient__name");
-    ingredients.forEach((ingredient) => {
-        emptyArray.push(ingredient.textContent);
-        function removeDuplicates(emptyArray) {
-           const uniqueArray = [];
-              emptyArray.forEach((ingredientItem) => {
-                if (!uniqueArray.includes(ingredientItem)) {
-                    uniqueArray.push(ingredientItem);
-                    console.log(uniqueArray);
-                    newlist.innerHTML = `
-                    <li> ${uniqueArray} </li>
-                    `;
-                }
-            })
-        }
-        console.log(removeDuplicates(emptyArray));
-
-    // const newItem = document.createElement("li");
-    // newItem.textContent = ingredient.textContent;
+  const ingredients = document.querySelectorAll(".ingredient__name");
+  ingredients.forEach((ingredient) => {
+    emptyArray.push(ingredient.textContent);
   });
+  function removeDuplicates(emptyArray) {
+      const unique = [];
+      emptyArray.forEach((ingredientItem) => {
+        emptyArray.sort();
+          if (!unique.includes(ingredientItem)) {
+              unique.push(ingredientItem);
+             
+        newlist.innerHTML += `<li> ${ingredientItem} </li>`;
+      }
+    });
+    return unique;
+  }
+        removeDuplicates(emptyArray);
 }
 setTimeout(displayIngredients, 200);
