@@ -1,5 +1,6 @@
 let main = document.querySelector("main");
 
+// Function to call the API asynchronously
 async function displayInformations() {
   const response = await fetch("recipes.json");
   if (!response.ok) {
@@ -10,6 +11,7 @@ async function displayInformations() {
   return data;
 }
 
+// Function to display the recipes with their titles, time and ingredients
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
     const article = document.createElement("article");
@@ -51,6 +53,9 @@ displayInformations().then((data) => {
   }
 });
 
+
+// Function to display ingredients items 
+// and sort them in alphabetical order
 const emptyArray = [];
 const newlist = document.querySelector(".newList");
 function displayIngredients() {
@@ -61,7 +66,7 @@ function displayIngredients() {
   function removeDuplicates(emptyArray) {
       const unique = [];
       emptyArray.forEach((ingredientItem) => {
-        emptyArray.sort();
+        emptyArray.sort((a, b) => a.localeCompare(b));
           if (!unique.includes(ingredientItem)) {
               unique.push(ingredientItem);
              
@@ -73,3 +78,15 @@ function displayIngredients() {
         removeDuplicates(emptyArray);
 }
 setTimeout(displayIngredients, 200);
+
+
+
+
+let arrayConcated = [];
+displayInformations().then((data) => {
+    for (let i = 0; i < data.recipes.length; i++) {
+        ustensilsArray = data.recipes[i].ustensils
+        ustensilsArray.sort(); 
+        arrayConcated = arrayConcated.concat(ustensilsArray);
+        console.log(arrayConcated);
+  }});

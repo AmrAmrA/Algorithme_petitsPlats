@@ -100,11 +100,10 @@ body {
     border: none; 
     outline: none;
     font-size: 18px;
+    display: none;
   }
-  .ingredient__button {
-    width: 50%;
-  }
-
+ 
+  /* List of integredients sorted in alphabetic order  */
   .newList {
     display: flex;
     flex-direction: column;
@@ -118,8 +117,8 @@ body {
     position: absolute;
     margin-left: 8%;
     margin-top: -1.2%;
+    display: none;
   }
-
   .newList li {
     margin: 10px 5px;
   }
