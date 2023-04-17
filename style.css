@@ -107,8 +107,10 @@ body {
 
   .newList {
     display: flex;
+    flex-direction: column;
+    height: 3000px;
+    width: 800px;
     flex-wrap: wrap;
-    width: 680px;
     background-color: #3282F7;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
