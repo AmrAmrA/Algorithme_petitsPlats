@@ -119,7 +119,23 @@ body {
     margin-top: -1.2%;
     display: none;
   }
-  .newList li {
+
+  .listAppliances {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 500px;
+    flex-wrap: wrap;
+    background-color: #68D9A4;
+    color: #FFFFFF;
+    font-family: 'Lato', 'sans-serif';
+    z-index: 3;
+    position: absolute;
+    margin-left: 21%;
+    margin-top: -1.2%;
+  }
+  .newList li, 
+  .listAppliances li {
     margin: 10px 5px;
   }
 

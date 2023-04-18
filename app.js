@@ -81,12 +81,25 @@ setTimeout(displayIngredients, 200);
 
 
 
-
+const listAppliances = document.querySelector(".listAppliances");
 let arrayConcated = [];
 displayInformations().then((data) => {
     for (let i = 0; i < data.recipes.length; i++) {
         ustensilsArray = data.recipes[i].ustensils
-        ustensilsArray.sort(); 
         arrayConcated = arrayConcated.concat(ustensilsArray);
-        console.log(arrayConcated);
-  }});
+      }
+  
+
+        function removeDouble(arrayConcated){
+            const unique = [];
+            arrayConcated.forEach((ustensilsItems) => {
+                if(!unique.includes(ustensilsItems)){
+                    unique.push(ustensilsItems)
+                      listAppliances.innerHTML += `<li> ${ustensilsItems} </li>`;
+                  }
+                }
+            );
+            return unique;
+        }
+        removeDouble(arrayConcated)
+});
