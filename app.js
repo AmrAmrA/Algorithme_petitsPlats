@@ -18,8 +18,8 @@ displayInformations().then((data) => {
     article.classList.add("recipe__card");
     main.appendChild(article);
     article.innerHTML = `
-        <div class = 'fake__image'> </div>
-        <div class = 'recipe__body'> 
+        <div class = 'fake__image' > </div>
+        <div class = 'recipe__body   ${data.recipes[i].appliance}'> 
             <div class = 'recipe__header'>
                 <h5 class = "recipe__title"> ${data.recipes[i].name} </h5>
                 <h5 class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
@@ -172,7 +172,6 @@ function searchByIngredientsButton() {
         querySection.appendChild(ingredientSpan);
         ingredientSpan.classList.add("ingredients__selected__setup");
         const recipe_cards = document.querySelectorAll(".recipe__card");
-        console.log(recipe_cards);
         recipe_cards.forEach((recipe_card) => {
           if (recipe_card.textContent.includes(ingredientSpan.textContent)) {
             recipe_card.style.display = "block";
@@ -184,3 +183,28 @@ function searchByIngredientsButton() {
     });
 }
 setTimeout(searchByIngredientsButton, 200);
+
+
+
+function searchByAppliancesButton() {
+  const ustensilsItems = document.querySelectorAll(".listUstensils li");
+  ustensilsItems.forEach((ustensilsItem) => {
+    ustensilsItem.addEventListener("click", () => {
+      const applianceSpan = ustensilsItem;
+      querySection.appendChild(applianceSpan);
+      applianceSpan.classList.add("ustensils__selected__setup");
+      const recipe_cards = document.querySelectorAll(".recipe__card");
+      recipe_cards.forEach((recipe_body) => {
+        console.log(applianceSpan.textContent);
+        if (recipe_body.innerHTML.includes(applianceSpan.textContent)) {
+
+          recipe_body.style.display = "block";
+        } else {
+          recipe_body.style.display = "none";
+
+        }
+      });
+    });
+  });
+}
+setTimeout(searchByAppliancesButton, 200);
