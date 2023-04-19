@@ -57,7 +57,7 @@ displayInformations().then((data) => {
 // Function to display ingredients items 
 // and sort them in alphabetical order
 const emptyArray = [];
-const newlist = document.querySelector(".newList");
+const listIngredients = document.querySelector(".listIngredients");
 function displayIngredients() {
   const ingredients = document.querySelectorAll(".ingredient__name");
   ingredients.forEach((ingredient) => {
@@ -70,7 +70,7 @@ function displayIngredients() {
           if (!unique.includes(ingredientItem)) {
               unique.push(ingredientItem);
              
-        newlist.innerHTML += `<li> ${ingredientItem} </li>`;
+        listIngredients.innerHTML += `<li> ${ingredientItem} </li>`;
       }
     });
     return unique;
@@ -80,7 +80,7 @@ function displayIngredients() {
 setTimeout(displayIngredients, 200);
 
 
-
+// Creating list of appliances items
 const listAppliances = document.querySelector(".listAppliances");
 let arrayConcated = [];
 displayInformations().then((data) => {
@@ -88,13 +88,11 @@ displayInformations().then((data) => {
         ustensilsArray = data.recipes[i].ustensils
         arrayConcated = arrayConcated.concat(ustensilsArray);
       }
-  
-
         function removeDouble(arrayConcated){
             const unique = [];
             arrayConcated.forEach((ustensilsItems) => {
                 if(!unique.includes(ustensilsItems)){
-                    unique.push(ustensilsItems)
+                    unique.push(ustensilsItems);
                       listAppliances.innerHTML += `<li> ${ustensilsItems} </li>`;
                   }
                 }
@@ -102,4 +100,26 @@ displayInformations().then((data) => {
             return unique;
         }
         removeDouble(arrayConcated)
+});
+
+// Creating list of ustensils items
+const listUstensils = document.querySelector(".listUstensils");
+let arrayConcatedAppliances = [];
+displayInformations().then((data) => {
+    for (let i = 0; i < data.recipes.length; i++) {
+        appliancesArray = data.recipes[i].appliance
+        arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
+      }
+        function removeDouble(arrayConcatedAppliances){
+            const unique = [];
+            arrayConcatedAppliances.forEach((appliancesItems) => {
+                if(!unique.includes(appliancesItems)){
+                    unique.push(appliancesItems);
+                      listUstensils.innerHTML += `<li> ${appliancesItems} </li>`;
+                  }
+                }
+            );
+            return unique;
+        }
+        removeDouble(arrayConcatedAppliances)
 });

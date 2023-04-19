@@ -104,7 +104,7 @@ body {
   }
  
   /* List of integredients sorted in alphabetic order  */
-  .newList {
+  .listIngredients {
     display: flex;
     flex-direction: column;
     height: 1700px;
@@ -133,10 +133,28 @@ body {
     position: absolute;
     margin-left: 21%;
     margin-top: -1.2%;
+    display: none;
   }
-  .newList li, 
-  .listAppliances li {
-    margin: 10px 5px;
+  .listIngredients li, 
+  .listAppliances li, 
+  .listUstensils li {
+    margin: 8px 0px 8px 3px;
+  }
+
+  .listUstensils {
+    display: flex;
+    flex-direction: column;
+    height: 128px;
+    width: 408px;
+    flex-wrap: wrap;
+    background-color: #ED6454;
+    color: #FFFFFF;
+    font-family: 'Lato', 'sans-serif';
+    z-index: 3;
+    position: absolute;
+    margin-left: 34%;
+    margin-top: -1.2%;
+    display: none;
   }
 
   /* -------Recipes Card-------- */
