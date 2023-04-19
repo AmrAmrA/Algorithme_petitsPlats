@@ -137,3 +137,31 @@ function searchByIngredients() {
   });
 }
 searchByIngredients();
+
+// ------------------ BUTTONS ------------------ //
+const ingredientButton = document.querySelector(".ingredient__button");
+ingredientButton.addEventListener("click", () => {
+  listIngredients.classList.toggle("display__list");
+  if (listIngredients.classList.contains("display__list")) {
+    listUstensils.classList.remove("display__list");
+    listAppliances.classList.remove("display__list");
+  }
+});
+
+const devicesButton = document.querySelector(".devices__button");
+devicesButton.addEventListener("click", () => {
+  listAppliances.classList.toggle("display__list");
+  if (listAppliances.classList.contains("display__list")) {
+    listUstensils.classList.remove("display__list");
+    listIngredients.classList.remove("display__list");
+  }
+});
+
+const toolsButton = document.querySelector(".tools__button");
+toolsButton.addEventListener("click", () => {
+  listUstensils.classList.toggle("display__list");
+  if (listUstensils.classList.contains("display__list")) {
+    listAppliances.classList.remove("display__list");
+    listIngredients.classList.remove("display__list");
+  }
+});

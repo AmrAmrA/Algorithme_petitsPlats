@@ -157,6 +157,10 @@ body {
     display: none;
   }
 
+  .display__list {
+    display: flex;
+  }
+
   /* -------Recipes Card-------- */
 
   main {
