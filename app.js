@@ -32,12 +32,8 @@ displayInformations().then((data) => {
                   .map(
                     (ingredient) =>
                       `<li>  
-                     <span class = "ingredient__name">  ${
-                       ingredient.ingredient
-                     } : </span>   
-                    <span> ${
-                      ingredient.quantity ? ingredient.quantity : ""
-                    } </span> 
+                     <span class = "ingredient__name">  ${ingredient.ingredient}  </span>   
+                    <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
                     <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
                     </li>`
                   )
@@ -67,9 +63,9 @@ function displayIngredients() {
     emptyArray.forEach((ingredientItem) => {
       emptyArray.sort((a, b) => a.localeCompare(b));
       if (!unique.includes(ingredientItem)) {
+       
         unique.push(ingredientItem);
-
-        listIngredients.innerHTML += `<li> ${ingredientItem} </li>`;
+        listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
       }
     });
     return unique;
@@ -167,20 +163,18 @@ toolsButton.addEventListener("click", () => {
 });
 
 // ------------------ Search with buttons ------------------ //
-// const ingredientsItems = document.querySelectorAll(".listIngredients li");
-// console.log(ingredientsItems);
 const querySection = document.querySelector(".buttons__selected");
 function searchByIngredientsButton() {
-    const recipe_cards = document.querySelectorAll(".recipe__card");
-    const ingredientsItems = document.querySelectorAll(".listIngredients li");
-    console.log(ingredientsItems);
-    ingredientsItems.forEach((ingredientItem) => {
-      ingredientItem.addEventListener("click", () => {
+  const ingredientsItems = document.querySelectorAll(".listIngredients li");
+  ingredientsItems.forEach((ingredientItem) => {
+    ingredientItem.addEventListener("click", () => {
         ingredientSpan = ingredientItem;
         querySection.appendChild(ingredientSpan);
         ingredientSpan.classList.add("ingredients__selected__setup");
+        const recipe_cards = document.querySelectorAll(".recipe__card");
+        console.log(recipe_cards);
         recipe_cards.forEach((recipe_card) => {
-          if (recipe_card.textContent.includes(ingredientItem.textContent)) {
+          if (recipe_card.textContent.includes(ingredientSpan.textContent)) {
             recipe_card.style.display = "block";
           } else {
             recipe_card.style.display = "none";
