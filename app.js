@@ -53,8 +53,7 @@ displayInformations().then((data) => {
   }
 });
 
-
-// Function to display ingredients items 
+// Function to display ingredients items
 // and sort them in alphabetical order
 const emptyArray = [];
 const listIngredients = document.querySelector(".listIngredients");
@@ -64,62 +63,77 @@ function displayIngredients() {
     emptyArray.push(ingredient.textContent);
   });
   function removeDuplicates(emptyArray) {
-      const unique = [];
-      emptyArray.forEach((ingredientItem) => {
-        emptyArray.sort((a, b) => a.localeCompare(b));
-          if (!unique.includes(ingredientItem)) {
-              unique.push(ingredientItem);
-             
+    const unique = [];
+    emptyArray.forEach((ingredientItem) => {
+      emptyArray.sort((a, b) => a.localeCompare(b));
+      if (!unique.includes(ingredientItem)) {
+        unique.push(ingredientItem);
+
         listIngredients.innerHTML += `<li> ${ingredientItem} </li>`;
       }
     });
     return unique;
   }
-        removeDuplicates(emptyArray);
+  removeDuplicates(emptyArray);
 }
 setTimeout(displayIngredients, 200);
-
 
 // Creating list of appliances items
 const listAppliances = document.querySelector(".listAppliances");
 let arrayConcated = [];
 displayInformations().then((data) => {
-    for (let i = 0; i < data.recipes.length; i++) {
-        ustensilsArray = data.recipes[i].ustensils
-        arrayConcated = arrayConcated.concat(ustensilsArray);
+  for (let i = 0; i < data.recipes.length; i++) {
+    ustensilsArray = data.recipes[i].ustensils;
+    arrayConcated = arrayConcated.concat(ustensilsArray);
+  }
+  function removeDouble(arrayConcated) {
+    const unique = [];
+    arrayConcated.forEach((ustensilsItems) => {
+      if (!unique.includes(ustensilsItems)) {
+        unique.push(ustensilsItems);
+        listAppliances.innerHTML += `<li> ${ustensilsItems} </li>`;
       }
-        function removeDouble(arrayConcated){
-            const unique = [];
-            arrayConcated.forEach((ustensilsItems) => {
-                if(!unique.includes(ustensilsItems)){
-                    unique.push(ustensilsItems);
-                      listAppliances.innerHTML += `<li> ${ustensilsItems} </li>`;
-                  }
-                }
-            );
-            return unique;
-        }
-        removeDouble(arrayConcated)
+    });
+    return unique;
+  }
+  removeDouble(arrayConcated);
 });
 
 // Creating list of ustensils items
 const listUstensils = document.querySelector(".listUstensils");
 let arrayConcatedAppliances = [];
 displayInformations().then((data) => {
-    for (let i = 0; i < data.recipes.length; i++) {
-        appliancesArray = data.recipes[i].appliance
-        arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
+  for (let i = 0; i < data.recipes.length; i++) {
+    appliancesArray = data.recipes[i].appliance;
+    arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
+  }
+  function removeDouble(arrayConcatedAppliances) {
+    const unique = [];
+    arrayConcatedAppliances.forEach((appliancesItems) => {
+      if (!unique.includes(appliancesItems)) {
+        unique.push(appliancesItems);
+        listUstensils.innerHTML += `<li> ${appliancesItems} </li>`;
       }
-        function removeDouble(arrayConcatedAppliances){
-            const unique = [];
-            arrayConcatedAppliances.forEach((appliancesItems) => {
-                if(!unique.includes(appliancesItems)){
-                    unique.push(appliancesItems);
-                      listUstensils.innerHTML += `<li> ${appliancesItems} </li>`;
-                  }
-                }
-            );
-            return unique;
-        }
-        removeDouble(arrayConcatedAppliances)
+    });
+    return unique;
+  }
+  removeDouble(arrayConcatedAppliances);
 });
+
+// ------------------ SEARCH BAR ------------------ //
+const queryInput = document.querySelector(".query__input");
+
+// Function to search recipes by ingredients
+queryInput.addEventListener("keyup", searchByIngredients);
+function searchByIngredients() {
+  const recipe_cards = document.querySelectorAll(".recipe__card");
+  const ingredients = document.querySelectorAll(".ingredient__name");
+  recipe_cards.forEach((recipe_card) => {
+    if (recipe_card.textContent.includes(queryInput.value)) {
+      recipe_card.style.display = "block";
+    } else {
+      recipe_card.style.display = "none";
+    }
+  });
+}
+searchByIngredients();
