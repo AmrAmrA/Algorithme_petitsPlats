@@ -165,3 +165,28 @@ toolsButton.addEventListener("click", () => {
     listIngredients.classList.remove("display__list");
   }
 });
+
+// ------------------ Search with buttons ------------------ //
+// const ingredientsItems = document.querySelectorAll(".listIngredients li");
+// console.log(ingredientsItems);
+const querySection = document.querySelector(".buttons__selected");
+function searchByIngredientsButton() {
+    const recipe_cards = document.querySelectorAll(".recipe__card");
+    const ingredientsItems = document.querySelectorAll(".listIngredients li");
+    console.log(ingredientsItems);
+    ingredientsItems.forEach((ingredientItem) => {
+      ingredientItem.addEventListener("click", () => {
+        ingredientSpan = ingredientItem;
+        querySection.appendChild(ingredientSpan);
+        ingredientSpan.classList.add("ingredients__selected__setup");
+        recipe_cards.forEach((recipe_card) => {
+          if (recipe_card.textContent.includes(ingredientItem.textContent)) {
+            recipe_card.style.display = "block";
+          } else {
+            recipe_card.style.display = "none";
+          }
+        });
+      });
+    });
+}
+setTimeout(searchByIngredientsButton, 200);
