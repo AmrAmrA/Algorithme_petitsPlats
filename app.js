@@ -194,16 +194,13 @@ function searchByAppliancesButton() {
       querySection.appendChild(applianceSpan);
       applianceSpan.classList.add("ustensils__selected__setup");
       const recipe_cards = document.querySelectorAll(".recipe__card");
-      recipe_cards.forEach((recipe_body) => {
-        console.log(applianceSpan.textContent);
-        if (recipe_body.innerHTML.includes(applianceSpan.textContent)) {
-
-          recipe_body.style.display = "block";
+      for (const recipeCard of recipe_cards) {
+        if (recipeCard.firstElementChild.nextElementSibling.classList[1] == applianceSpan.outerText) {
+          recipeCard.style.display = "block";
         } else {
-          recipe_body.style.display = "none";
-
+          recipeCard.style.display = "none";
         }
-      });
+      }
     });
   });
 }
