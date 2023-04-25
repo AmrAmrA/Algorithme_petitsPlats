@@ -1,8 +1,8 @@
-let main = document.querySelector("main");
 
 // Function to call the API asynchronously
 async function displayInformations() {
-  const response = await fetch("recipes.json");
+  const response = await fetch("recipes.json", Headers);
+  console.log(response.body);
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
@@ -13,22 +13,23 @@ async function displayInformations() {
 
 // Function to display the recipes with their titles, time and ingredients
 displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
+  const main = document.querySelector("main");
+  for (const recipe of data.recipes) {
     const article = document.createElement("article");
     article.classList.add("recipe__card");
     main.appendChild(article);
     article.innerHTML = `
         <div class = 'fake__image' > </div>
-        <div class = 'recipe__body   ${data.recipes[i].appliance}'> 
+        <div class = 'recipe__body   ${recipe.appliance}'> 
             <div class = 'recipe__header'>
-                <h5 class = "recipe__title"> ${data.recipes[i].name} </h5>
-                <h5 class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
-                  data.recipes[i].time
-                } min </h5>
+                <h1 class = "recipe__title"> ${recipe.name} </h1>
+                <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
+                  recipe.time
+                } min </span>
             </div>
             <div class = "recipe__preparation">
              <ul>
-                ${data.recipes[i].ingredients
+                ${recipe.ingredients
                   .map(
                     (ingredient) =>
                       `<li>  
@@ -41,7 +42,7 @@ displayInformations().then((data) => {
                 
              </ul>
              <p class = "recipe__ingredients">
-             ${data.recipes[i].description}
+             ${recipe.description}
              </p>
             </div>
         </div>
@@ -79,15 +80,15 @@ const listAppliances = document.querySelector(".listAppliances");
 let arrayConcated = [];
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
-    ustensilsArray = data.recipes[i].ustensils;
-    arrayConcated = arrayConcated.concat(ustensilsArray);
+    appliancesArray = data.recipes[i].appliance;
+    arrayConcated = arrayConcated.concat(appliancesArray);
   }
   function removeDouble(arrayConcated) {
     const unique = [];
-    arrayConcated.forEach((ustensilsItems) => {
-      if (!unique.includes(ustensilsItems)) {
-        unique.push(ustensilsItems);
-        listAppliances.innerHTML += `<li> ${ustensilsItems} </li>`;
+    arrayConcated.forEach((appliancesItems) => {
+      if (!unique.includes(appliancesItems)) {
+        unique.push(appliancesItems);
+        listAppliances.innerHTML += `<li> ${appliancesItems} </li>`;
       }
     });
     return unique;
@@ -97,23 +98,23 @@ displayInformations().then((data) => {
 
 // Creating list of ustensils items
 const listUstensils = document.querySelector(".listUstensils");
-let arrayConcatedAppliances = [];
+let arrayConcatedUstensils = [];
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
-    appliancesArray = data.recipes[i].appliance;
-    arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
+    ustensilsArray = data.recipes[i].ustensils;
+    arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
   }
-  function removeDouble(arrayConcatedAppliances) {
+  function removeDouble(arrayConcatedUstensils) {
     const unique = [];
-    arrayConcatedAppliances.forEach((appliancesItems) => {
-      if (!unique.includes(appliancesItems)) {
-        unique.push(appliancesItems);
-        listUstensils.innerHTML += `<li> ${appliancesItems} </li>`;
+    arrayConcatedUstensils.forEach((ustensilsItems) => {
+      if (!unique.includes(ustensilsItems)) {
+        unique.push(ustensilsItems);
+        listUstensils.innerHTML += `<li> ${ustensilsItems} </li>`;
       }
     });
     return unique;
   }
-  removeDouble(arrayConcatedAppliances);
+  removeDouble(arrayConcatedUstensils);
 });
 
 // ------------------ SEARCH BAR ------------------ //
@@ -135,34 +136,55 @@ function searchByIngredients() {
 searchByIngredients();
 
 // ------------------ BUTTONS ------------------ //
-const ingredientButton = document.querySelector(".ingredient__button");
-ingredientButton.addEventListener("click", () => {
-  listIngredients.classList.toggle("display__list");
-  if (listIngredients.classList.contains("display__list")) {
-    listUstensils.classList.remove("display__list");
-    listAppliances.classList.remove("display__list");
-  }
+const buttons = document.querySelectorAll(".button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const type = button.getAttribute("data-type");
+    switch(type){
+      case 'listIngredients':
+        listUstensils.classList.remove("display__list");
+        listAppliances.classList.remove("display__list");
+        break;
+      case 'listAppliances':
+        listUstensils.classList.remove("display__list");
+        listIngredients.classList.remove("display__list");
+        break;
+      case 'listUstensils':
+        listIngredients.classList.remove("display__list");
+        listAppliances.classList.remove("display__list");
+        break;
+    }
+    document.querySelector(`.${type}`).classList.toggle("display__list");
+  });
 });
+// const ingredientButton = document.querySelector(".ingredient__button");
+// ingredientButton.addEventListener("click", () => {
+//   listIngredients.classList.toggle("display__list");
+//   if (listIngredients.classList.contains("display__list")) {
+//     listUstensils.classList.remove("display__list");
+//     listAppliances.classList.remove("display__list");
+//   }
+// });
 
-const devicesButton = document.querySelector(".devices__button");
-devicesButton.addEventListener("click", () => {
-  listAppliances.classList.toggle("display__list");
-  if (listAppliances.classList.contains("display__list")) {
-    listUstensils.classList.remove("display__list");
-    listIngredients.classList.remove("display__list");
-  }
-});
+// const devicesButton = document.querySelector(".devices__button");
+// devicesButton.addEventListener("click", () => {
+//   listAppliances.classList.toggle("display__list");
+//   if (listAppliances.classList.contains("display__list")) {
+//     listUstensils.classList.remove("display__list");
+//     listIngredients.classList.remove("display__list");
+//   }
+// });
 
-const toolsButton = document.querySelector(".tools__button");
-toolsButton.addEventListener("click", () => {
-  listUstensils.classList.toggle("display__list");
-  if (listUstensils.classList.contains("display__list")) {
-    listAppliances.classList.remove("display__list");
-    listIngredients.classList.remove("display__list");
-  }
-});
+// const toolsButton = document.querySelector(".tools__button");
+// toolsButton.addEventListener("click", () => {
+//   listUstensils.classList.toggle("display__list");
+//   if (listUstensils.classList.contains("display__list")) {
+//     listAppliances.classList.remove("display__list");
+//     listIngredients.classList.remove("display__list");
+//   }
+// });
 
-// ------------------ Search with buttons ------------------ //
+// ------------------ Search with labels ------------------ //
 const querySection = document.querySelector(".buttons__selected");
 function searchByIngredientsButton() {
   const ingredientsItems = document.querySelectorAll(".listIngredients li");
@@ -187,12 +209,12 @@ setTimeout(searchByIngredientsButton, 200);
 
 
 function searchByAppliancesButton() {
-  const ustensilsItems = document.querySelectorAll(".listUstensils li");
-  ustensilsItems.forEach((ustensilsItem) => {
-    ustensilsItem.addEventListener("click", () => {
-      const applianceSpan = ustensilsItem;
+  const appliancesItems = document.querySelectorAll(".listAppliances li");
+  appliancesItems.forEach((appliancesItem) => {
+    appliancesItem.addEventListener("click", () => {
+      const applianceSpan = appliancesItem;
       querySection.appendChild(applianceSpan);
-      applianceSpan.classList.add("ustensils__selected__setup");
+      applianceSpan.classList.add("appliance__selected__setup");
       const recipe_cards = document.querySelectorAll(".recipe__card");
       for (const recipeCard of recipe_cards) {
         if (recipeCard.firstElementChild.nextElementSibling.classList[1] == applianceSpan.outerText) {
@@ -205,3 +227,6 @@ function searchByAppliancesButton() {
   });
 }
 setTimeout(searchByAppliancesButton, 200);
+ 
+
+// function searchBy
