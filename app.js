@@ -20,7 +20,7 @@ displayInformations().then((data) => {
     main.appendChild(article);
     article.innerHTML = `
         <div class = 'fake__image' > </div>
-        <div class = 'recipe__body   ${recipe.appliance}'> 
+        <div class = 'recipe__body   ${recipe.appliance.toLowerCase()}'> 
             <div class = 'recipe__header'>
                 <h1 class = "recipe__title"> ${recipe.name} </h1>
                 <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
@@ -166,8 +166,9 @@ function searchByIngredientsButton() {
         querySection.appendChild(ingredientSpan);
         ingredientSpan.classList.add("ingredients__selected__setup");
         const recipe_cards = document.querySelectorAll(".recipe__card");
+        console.log(ingredientItem);
         recipe_cards.forEach((recipe_card) => {
-          if (recipe_card.textContent.includes(ingredientSpan.textContent)) {
+          if (recipe_card.textContent.toLocaleLowerCase().includes(ingredientItem.outerText)) {
             recipe_card.style.display = "block";
           } else {
             recipe_card.style.display = "none";
@@ -183,7 +184,8 @@ setTimeout(searchByIngredientsButton, 200);
 function searchByAppliancesButton() {
   const appliancesItems = document.querySelectorAll(".listAppliances li");
   appliancesItems.forEach((appliancesItem) => {
-    appliancesItem.addEventListener("click", () => {
+    appliancesItem.addEventListener("click", (e) => {
+      e.preventDefault();
       const applianceSpan = appliancesItem;
       querySection.appendChild(applianceSpan);
       applianceSpan.classList.add("appliance__selected__setup");
