@@ -2,7 +2,7 @@
 // Function to call the API asynchronously
 async function displayInformations() {
   const response = await fetch("recipes.json", Headers);
-  console.log(response.body);
+
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
@@ -53,69 +53,66 @@ displayInformations().then((data) => {
 // Function to display ingredients items
 // and sort them in alphabetical order
 const emptyArray = [];
-const listIngredients = document.querySelector(".listIngredients");
-function displayIngredients() {
-  const ingredients = document.querySelectorAll(".ingredient__name");
-  ingredients.forEach((ingredient) => {
-    emptyArray.push(ingredient.textContent);
-  });
-  function removeDuplicates(emptyArray) {
-    const unique = [];
-    emptyArray.forEach((ingredientItem) => {
-      emptyArray.sort((a, b) => a.localeCompare(b));
-      if (!unique.includes(ingredientItem)) {
-       
-        unique.push(ingredientItem);
-        listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
-      }
-    });
-    return unique;
+displayInformations().then((data) => {
+  for (let i = 0; i < data.recipes.length; i++) {
+    for (let j = 0; j < data.recipes[i].ingredients.length; j++) {
+      emptyArray.push(data.recipes[i].ingredients[j].ingredient);
+    }
   }
-  removeDuplicates(emptyArray);
-}
-setTimeout(displayIngredients, 200);
+  // lowercase all the ingredients inside the array 
+  const lowerCaseArray = emptyArray.map((ingredient) => ingredient.toLowerCase());
+  const sortedArray = lowerCaseArray.sort();
+  let uniqueArray = [...new Set(sortedArray)];
+  const listIngredients = document.querySelector(".listIngredients");
+  uniqueArray.forEach((ingredient) => {
+    listIngredients.innerHTML += `<li> ${ingredient} </li>`;
+  });
+});
+
+const listIngredients = document.querySelector(".listIngredients");
+   
 
 // Creating list of appliances items
 const listAppliances = document.querySelector(".listAppliances");
-let arrayConcated = [];
+const emptyAppliancesArray = [];
 displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    appliancesArray = data.recipes[i].appliance;
-    arrayConcated = arrayConcated.concat(appliancesArray);
+  for (const recipe of data.recipes) {
+    emptyAppliancesArray.push(recipe.appliance);
   }
-  function removeDouble(arrayConcated) {
-    const unique = [];
-    arrayConcated.forEach((appliancesItems) => {
-      if (!unique.includes(appliancesItems)) {
-        unique.push(appliancesItems);
-        listAppliances.innerHTML += `<li> ${appliancesItems} </li>`;
-      }
-    });
-    return unique;
-  }
-  removeDouble(arrayConcated);
+  const lowercaseAppliancesArray = emptyAppliancesArray.map((appliance) => appliance.toLowerCase());
+  const sortedAppliancesArray = lowercaseAppliancesArray.sort(
+    function(a,b) {
+      return a.localeCompare(b);
+    }
+  );
+  let uniqueAppliancesArray = [...new Set(sortedAppliancesArray)];
+  uniqueAppliancesArray.forEach((appliance) => {
+    listAppliances.innerHTML += `<li> ${appliance} </li>`;
+  })
 });
+
 
 // Creating list of ustensils items
 const listUstensils = document.querySelector(".listUstensils");
-let arrayConcatedUstensils = [];
+const emptyUstensilsArray = [];
 displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    ustensilsArray = data.recipes[i].ustensils;
-    arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
+  for (const recipe of data.recipes) {
+    for (const ustensil of recipe.ustensils) {
+      emptyUstensilsArray.push(ustensil)
+    }
   }
-  function removeDouble(arrayConcatedUstensils) {
-    const unique = [];
-    arrayConcatedUstensils.forEach((ustensilsItems) => {
-      if (!unique.includes(ustensilsItems)) {
-        unique.push(ustensilsItems);
-        listUstensils.innerHTML += `<li> ${ustensilsItems} </li>`;
-      }
-    });
-    return unique;
-  }
-  removeDouble(arrayConcatedUstensils);
+  const lowercaseUstensilsArray = emptyUstensilsArray.map((ustensil) => ustensil.toLowerCase());
+  const sortedUstensilsArray = lowercaseUstensilsArray.sort(
+    function(a,b) {
+      return a.localeCompare(b);
+    }
+  );
+  let uniqueUstensilsArray = [...new Set(sortedUstensilsArray)];
+  uniqueUstensilsArray.forEach((ustensil) => {
+    listUstensils.innerHTML += `<li> ${ustensil} </li>`;
+  })
 });
+
 
 // ------------------ SEARCH BAR ------------------ //
 const queryInput = document.querySelector(".query__input");
@@ -157,32 +154,7 @@ buttons.forEach((button) => {
     document.querySelector(`.${type}`).classList.toggle("display__list");
   });
 });
-// const ingredientButton = document.querySelector(".ingredient__button");
-// ingredientButton.addEventListener("click", () => {
-//   listIngredients.classList.toggle("display__list");
-//   if (listIngredients.classList.contains("display__list")) {
-//     listUstensils.classList.remove("display__list");
-//     listAppliances.classList.remove("display__list");
-//   }
-// });
 
-// const devicesButton = document.querySelector(".devices__button");
-// devicesButton.addEventListener("click", () => {
-//   listAppliances.classList.toggle("display__list");
-//   if (listAppliances.classList.contains("display__list")) {
-//     listUstensils.classList.remove("display__list");
-//     listIngredients.classList.remove("display__list");
-//   }
-// });
-
-// const toolsButton = document.querySelector(".tools__button");
-// toolsButton.addEventListener("click", () => {
-//   listUstensils.classList.toggle("display__list");
-//   if (listUstensils.classList.contains("display__list")) {
-//     listAppliances.classList.remove("display__list");
-//     listIngredients.classList.remove("display__list");
-//   }
-// });
 
 // ------------------ Search with labels ------------------ //
 const querySection = document.querySelector(".buttons__selected");
