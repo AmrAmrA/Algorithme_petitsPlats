@@ -130,7 +130,6 @@ function searchByIngredients() {
     }
   });
 }
-searchByIngredients();
 
 // ------------------ BUTTONS ------------------ //
 const buttons = document.querySelectorAll(".button");
@@ -157,27 +156,46 @@ buttons.forEach((button) => {
 
 
 // ------------------ Search with labels ------------------ //
+let arrayCreated = [];
 const querySection = document.querySelector(".buttons__selected");
+
+
+
+
 function searchByIngredientsButton() {
   const ingredientsItems = document.querySelectorAll(".listIngredients li");
   ingredientsItems.forEach((ingredientItem) => {
     ingredientItem.addEventListener("click", () => {
-        ingredientSpan = ingredientItem;
+        const ingredientSpan = ingredientItem;
         querySection.appendChild(ingredientSpan);
         ingredientSpan.classList.add("ingredients__selected__setup");
-        const recipe_cards = document.querySelectorAll(".recipe__card");
-        console.log(ingredientItem);
-        recipe_cards.forEach((recipe_card) => {
-          if (recipe_card.textContent.toLocaleLowerCase().includes(ingredientItem.outerText)) {
-            recipe_card.style.display = "block";
-          } else {
-            recipe_card.style.display = "none";
-          }
-        });
       });
-    });
-}
-setTimeout(searchByIngredientsButton, 200);
+    })};
+  setTimeout(searchByIngredientsButton, 500);
+
+  const recipe_cards = document.querySelectorAll(".recipe__card");
+      function displayRecipes() {
+        if (searchByIngredientsButton) {
+          recipe_cards.forEach((recipe_card) => {
+            if (recipe_card.textContent.toLocaleLowerCase()
+            .includes(ingredientItem.outerText)) {
+              recipe_card.style.display = "block";
+            } else {
+              recipe_card.style.display = "none";
+            }
+
+      })};
+      }
+      setTimeout(displayRecipes, 500);
+
+      //              for(let i = 0; i < elements.length; i++) {
+        // arrayCreated.push(elements[i].childNodes[1].innerText.toLocaleLowerCase());
+      // }
+      // let uniqueArray = [...new Set(arrayCreated)];
+      // uniqueArray.sort();
+      // console.log(uniqueArray);
+      //        let elements = recipe_card.children[1].lastElementChild.children[0].children;
+      // console.log(elements);
 
 
 
