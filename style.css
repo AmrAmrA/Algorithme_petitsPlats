@@ -133,8 +133,8 @@ body {
   .listIngredients {
     display: flex;
     flex-direction: column;
-    height: 1700px;
-    width: 685px;
+    height: 700px;
+    width: 335px;
     flex-wrap: wrap;
     background-color: #3282F7;
     color: #FFFFFF;
@@ -144,6 +144,7 @@ body {
     margin-left: 8%;
     margin-top: -1.2%;
     display: none;
+    overflow-y: auto;
   }
   
   .listIngredients li:hover {

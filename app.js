@@ -54,9 +54,9 @@ displayInformations().then((data) => {
 // and sort them in alphabetical order
 const emptyArray = [];
 displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    for (let j = 0; j < data.recipes[i].ingredients.length; j++) {
-      emptyArray.push(data.recipes[i].ingredients[j].ingredient);
+  for (const recipe of data.recipes) {
+    for (const ingredient of recipe.ingredients) {
+      emptyArray.push(ingredient.ingredient);
     }
   }
   // lowercase all the ingredients inside the array 
