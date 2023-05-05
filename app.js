@@ -91,7 +91,6 @@ displayInformations().then((data) => {
   })
 });
 
-
 // Creating list of ustensils items
 const listUstensils = document.querySelector(".listUstensils");
 const emptyUstensilsArray = [];
@@ -122,13 +121,23 @@ queryInput.addEventListener("keyup", searchByIngredients);
 function searchByIngredients() {
   const recipe_cards = document.querySelectorAll(".recipe__card");
   const ingredients = document.querySelectorAll(".ingredient__name");
-  recipe_cards.forEach((recipe_card) => {
-    if (recipe_card.textContent.includes(queryInput.value)) {
-      recipe_card.style.display = "block";
-    } else {
-      recipe_card.style.display = "none";
-    }
-  });
+  const queryValue = queryInput.value.toLowerCase();
+  if (queryValue.length >= 3) {
+    recipe_cards.forEach((recipe_card) => {
+      if (recipe_card.textContent.includes(queryInput.value)) {
+        recipe_card.textContent.toLowerCase();
+        recipe_card.style.display = "block";
+        console.log(recipe_card.textContent);
+      } else {
+        recipe_card.style.display = "none";
+      }
+    })
+  }
+  else {
+    console.log("error");
+    console.log(queryInput.value.length);
+
+  }
 }
 
 // ------------------ BUTTONS ------------------ //
@@ -218,7 +227,7 @@ function searchByAppliancesButton() {
     });
   });
 }
-setTimeout(searchByAppliancesButton, 200);
+setTimeout(searchByAppliancesButton, 500);
  
 
 // function searchBy
