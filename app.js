@@ -52,3 +52,26 @@ displayInformations().then((data) => {
         `;
   }
 });
+const emptyArray = [];
+displayInformations().then((data) => {
+  for (recipe of data.recipes) {
+      console.log(Object.values(recipe));
+      console.log(recipe.appliance);
+      console.log(recipe.ustensils);
+      for (const ingredients of recipe.ingredients) {
+          console.log(ingredients.ingredient);
+          emptyArray.push(ingredients.ingredient);
+      }
+  }
+        emptyArray.push(recipe.appliance);
+        emptyArray.push(recipe.ustensils);
+        console.log(emptyArray);
+//         for (oneRecipe of data.recipes) {
+//           if (oneRecipe.includes(emptyArray)) {
+//             console.log("ok");
+//           }
+//            else {
+//             console.log("no");                               
+//         }
+// }
+});
