@@ -62,13 +62,11 @@ displayInformations().then((data) => {
 
     for (const ingredients of recipe.ingredients) {
       emptyArray.push(ingredients.ingredient);
-      console.log(emptyArray);
     }
   }
 
   const newArrayWithoutDuplicates = [...new Set(emptyArray)];
   const LatestArrayVersion = newArrayWithoutDuplicates.flat();
-  console.log(LatestArrayVersion);
   const main = document.querySelector("main");
   queryInput.addEventListener("keyup", (e) => {
     main.innerHTML = "";
@@ -77,12 +75,13 @@ displayInformations().then((data) => {
       for (oneRecipe of data.recipes) {
         const article = document.createElement("article");
         article.classList.add("recipe__card");
+        const flatUstensils = oneRecipe.ustensils.flat();
+        console.log(oneRecipe.appliance, flatUstensils, oneRecipe.ingredients);
         if (
           oneRecipe.appliance === inputValue ||
           oneRecipe.ustensils.includes(inputValue) ||
           oneRecipe.ingredients.includes(inputValue)
         ) {
-          console.log(oneRecipe);
           main.appendChild(article);
           article.innerHTML = `
         <div class = 'fake__image' > </div>
