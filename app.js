@@ -57,29 +57,70 @@ const queryInput = document.querySelector(".query__input");
 const emptyArray = [];
 displayInformations().then((data) => {
   for (recipe of data.recipes) {
-      // console.log(Object.values(recipe));
-      const newArray = Object.values(recipe).slice(3, 8);
-      newArray.splice(2, 1);
-      newArray.splice(1, 1);
-      emptyArray.push(recipe.appliance);
-      emptyArray.push(recipe.ustensils);
+    emptyArray.push(recipe.appliance);
+    emptyArray.push(recipe.ustensils);
 
-      for (const ingredients of recipe.ingredients) {
-          emptyArray.push(ingredients.ingredient);
+    for (const ingredients of recipe.ingredients) {
+      emptyArray.push(ingredients.ingredient);
+      console.log(emptyArray);
+    }
+  }
+
+  const newArrayWithoutDuplicates = [...new Set(emptyArray)];
+  const LatestArrayVersion = newArrayWithoutDuplicates.flat();
+  console.log(LatestArrayVersion);
+  const main = document.querySelector("main");
+  queryInput.addEventListener("keyup", (e) => {
+    main.innerHTML = "";
+    const inputValue = e.target.value;
+    if (LatestArrayVersion.includes(inputValue)) {
+      for (oneRecipe of data.recipes) {
+        const article = document.createElement("article");
+        article.classList.add("recipe__card");
+        if (
+          oneRecipe.appliance === inputValue ||
+          oneRecipe.ustensils.includes(inputValue) ||
+          oneRecipe.ingredients.includes(inputValue)
+        ) {
+          console.log(oneRecipe);
+          main.appendChild(article);
+          article.innerHTML = `
+        <div class = 'fake__image' > </div>
+        <div class = 'recipe__body   ${oneRecipe.appliance}'> 
+            <div class = 'recipe__header'>
+                <h1 class = "recipe__title"> ${oneRecipe.name} </h1>
+                <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
+                  oneRecipe.time
+                } min </span>
+            </div>
+            <div class = "recipe__preparation">
+             <ul>
+                ${oneRecipe.ingredients
+                  .map(
+                    (ingredient) =>
+                      `<li>  
+                     <span class = "ingredient__name">  ${
+                       ingredient.ingredient
+                     }  </span>   
+                    <span> : ${
+                      ingredient.quantity ? ingredient.quantity : ""
+                    } </span> 
+                    <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
+                    </li>`
+                  )
+                  .join("")}
+                
+             </ul>
+             <p class = "recipe__ingredients">
+             ${oneRecipe.description}
+             </p>
+            </div>
+        </div>
+        `;
         }
       }
-        
-        const newArrayWithoutDuplicates = [...new Set(emptyArray)];
-        const LatestArrayVersion = newArrayWithoutDuplicates.flat(); 
-        console.log(LatestArrayVersion);
-        queryInput.addEventListener('keyup', (e) => {
-          const inputValue = e.target.value;
-          if(LatestArrayVersion.includes(inputValue)) {
-            console.log('yes');
-          } else {
-            console.log('no');
-          }}); 
+    } else {
+      console.log("no");
+    }
   });
-
-
-  
+});
