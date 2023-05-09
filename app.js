@@ -52,6 +52,8 @@ displayInformations().then((data) => {
         `;
   }
 });
+
+const queryInput = document.querySelector(".query__input");
 const emptyArray = [];
 displayInformations().then((data) => {
   for (recipe of data.recipes) {
@@ -59,23 +61,25 @@ displayInformations().then((data) => {
       const newArray = Object.values(recipe).slice(3, 8);
       newArray.splice(2, 1);
       newArray.splice(1, 1);
-      console.log(newArray);
-      // console.log(recipe.appliance);
-      // console.log(recipe.ustensils);
-      // for (const ingredients of recipe.ingredients) {
-      //     console.log(ingredients.ingredient);
-      //     emptyArray.push(ingredients.ingredient);
-      // }
-  }
-        emptyArray.push(recipe.appliance);
-        emptyArray.push(recipe.ustensils);
-        // console.log(emptyArray);
-//         for (oneRecipe of data.recipes) {
-//           if (oneRecipe.includes(emptyArray)) {
-//             console.log("ok");
-//           }
-//            else {
-//             console.log("no");                               
-//         }
-// }
-});
+      emptyArray.push(recipe.appliance);
+      emptyArray.push(recipe.ustensils);
+
+      for (const ingredients of recipe.ingredients) {
+          emptyArray.push(ingredients.ingredient);
+        }
+      }
+        
+        const newArrayWithoutDuplicates = [...new Set(emptyArray)];
+        const LatestArrayVersion = newArrayWithoutDuplicates.flat(); 
+        console.log(LatestArrayVersion);
+        queryInput.addEventListener('keyup', (e) => {
+          const inputValue = e.target.value;
+          if(LatestArrayVersion.includes(inputValue)) {
+            console.log('yes');
+          } else {
+            console.log('no');
+          }}); 
+  });
+
+
+  
