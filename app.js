@@ -173,3 +173,36 @@ displayInformations().then((data) => {
     }
   }});
 });
+
+
+
+// ------------- Buttons ranges // Labels ----------------- //
+const textIngredient    = document.querySelector(".text__ingredient");
+const listUstensils     = document.querySelector(".listUstensils");
+const listAppliances    = document.querySelector(".listAppliances");
+const listIngredients   = document.querySelector(".listIngredients");
+const ingredientsInput  = document.querySelector('.firstButton input')
+const buttons = document.querySelectorAll(".recipe__button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const type = button.getAttribute("data-type");
+    switch(type){
+      case 'listIngredients':
+        listUstensils.classList.remove("display__list");
+        listAppliances.classList.remove("display__list");
+        textIngredient.classList.toggle("display__text");
+        ingredientsInput.style.display = 'block'; 
+        break;
+      case 'listAppliances':
+        listUstensils.classList.remove("display__list");
+        listIngredients.classList.remove("display__list");
+   
+        break;
+      case 'listUstensils':
+        listIngredients.classList.remove("display__list");
+        listAppliances.classList.remove("display__list");
+        break;
+    }
+    document.querySelector(`.${type}`).classList.toggle("display__list");
+  });
+});

@@ -93,10 +93,11 @@ body {
     align-items: center;
     margin-right: 15px;
     margin-bottom: 20px;
-    width: 415px;
+    width: 220px;
     height: 69px;
     border-radius: 5px;
     cursor: pointer;
+    padding: 0px 10px;
   }
 
   .text__button {
@@ -104,7 +105,6 @@ body {
     color: aliceblue;
     font-weight: 700;
     font-size: 18px;
-    display: none;
   }
 
   .ingredient__button {
@@ -121,15 +121,25 @@ body {
     color: aliceblue;
   }
 
-  .button__label input {
+  .firstButton input, .secondButton input, .thirdButton input {
     background-color: #3282F7;
     color: #FFFFFF;
     border: none; 
     outline: none;
+    display: none;
     font-size: 18px;
     width: 250px;
     height: 60px;
   }
+
+  .secondButton input {
+    background-color: #68D9A4;
+  }
+  .thirdButton input {
+    background-color: #ED6454;
+  }
+
+
  
   /* List of integredients sorted in alphabetic order  */
   .listIngredients {
@@ -149,11 +159,12 @@ body {
     overflow-y: scroll;
   }
 
-  .button__label {
+  .firstButton, .secondButton, .thirdButton {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    cursor: pointer;
+    width: 93%;
   }
   
   .listIngredients li:hover {
@@ -213,6 +224,12 @@ body {
 
   .display__list {
     display: flex;
+  }
+  .display__text {
+    display: none;
+  }
+  .display__input {
+    display: block;
   }
 
   /* -------Recipes Card-------- */
