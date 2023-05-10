@@ -85,7 +85,7 @@ body {
   .buttons__range {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px 0px 0px 8.2%;
+    margin: 12px 0px 0px 8.2%;
   }
   .recipe__button {
     display: flex;
@@ -93,7 +93,7 @@ body {
     align-items: center;
     margin-right: 15px;
     margin-bottom: 20px;
-    width: 170px;
+    width: 415px;
     height: 69px;
     border-radius: 5px;
     cursor: pointer;
@@ -104,6 +104,7 @@ body {
     color: aliceblue;
     font-weight: 700;
     font-size: 18px;
+    display: none;
   }
 
   .ingredient__button {
@@ -120,13 +121,14 @@ body {
     color: aliceblue;
   }
 
-  .ingredient__input {
+  .button__label input {
     background-color: #3282F7;
     color: #FFFFFF;
     border: none; 
     outline: none;
     font-size: 18px;
-    display: none;
+    width: 250px;
+    height: 60px;
   }
  
   /* List of integredients sorted in alphabetic order  */
@@ -145,6 +147,13 @@ body {
     display: none;
     overflow-x: auto;
     overflow-y: scroll;
+  }
+
+  .button__label {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
   }
   
   .listIngredients li:hover {

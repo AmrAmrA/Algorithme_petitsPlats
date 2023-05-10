@@ -31,10 +31,12 @@
     <ul class="buttons__selected"></ul>
     <section class="buttons__range">
         <div class="button ingredient__button recipe__button" data-type="listIngredients">
-            <p class="text__button">Ingredients</p>
-            <input type="text" id="ingredient__input" name="ingredient__input" class="ingredient__input" placeholder="Rechercher un ingrédient">
-            <i class="fa-solid fa-chevron-down"></i>
-            <i class="fa-solid fa-chevron-up" style="display : none"></i>
+            <label for="ingredients__place" id="ingrdients__label" class="button__label">
+                <p class="text__button">Ingredients</p>
+                <input type="text" placeholder="Rechercher un ingrédient" id="ingredients__place">
+                <i class="fa-solid fa-chevron-down"></i>
+                <i class="fa-solid fa-chevron-up" style="display : none"></i>
+            </label>
         </div>
         <div class="button devices__button recipe__button" data-type="listAppliances">
             <p class="text__button">Appareils</p>
