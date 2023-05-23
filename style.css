@@ -156,8 +156,9 @@ body {
     background-color: #3282F7;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
+    position: absolute;
     z-index: 3;
-    opacity: 0;
+    display: none;
     overflow-x: auto;
     overflow-y: scroll;
   }
@@ -180,15 +181,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 320px;
-    width: 240px;
+    width: 220px;
     flex-wrap: wrap;
     background-color: #68D9A4;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
+    position: absolute;
     z-index: 3;
-    opacity: 0;
+    display: none;
     margin-top: -19px;
-    margin-left: 13px;
   }
   .listAppliances li:hover {
     background-color: #b5e8c9;
@@ -205,10 +206,10 @@ body {
     background-color: #ED6454;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
+    position: absolute;
     z-index: 3;
-    opacity: 0;
+    display: none;
     margin-top: -19px;
-    margin-left: 8px;
   }
 
   .listUstensils li:hover {
@@ -224,7 +225,7 @@ body {
   }
 
   .display__list {
-    opacity: 1;
+    display: block;
   }
   .display__text {
     display: none;

@@ -159,7 +159,6 @@ buttons.forEach((button) => {
         listUstensils.classList.remove("display__list");
         listAppliances.classList.remove("display__list");
         textIngredient.classList.toggle("display__text");
-        ingredientsInput.style.display = 'block'; 
         break;
       case 'listAppliances':
         listUstensils.classList.remove("display__list");
