@@ -30,39 +30,48 @@
     </section>
     <ul class="buttons__selected"></ul>
     <section class="buttons__range">
-        <div class="button ingredient__button recipe__button" data-type="listIngredients">
-            <label for="ingredients__place" id="ingrdients__label" class="firstButton">
-                <p class="text__button text__ingredient">Ingredients</p>
-                <input type="text" placeholder="Rechercher un ingrédient" id="ingredients__place">
-                <i class="fa-solid fa-chevron-down"></i>
-                <i class="fa-solid fa-chevron-up" style="display : none"></i>
-            </label>
-        </div>
-
-
-
-        <div class="button devices__button recipe__button" data-type="listAppliances">
-                <label for="devices___place" id="devices__label" class="secondButton">
-                    <p class="text__button text__appliance">Appareils</p>
-                    <input type="text" placeholder="Rechercher un appareil" id="devices__place">
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <i class="fa-solid fa-chevron-up" style="display : none"></i>
-                </label>
-        </div>
-
-
-        <div class="button tools__button recipe__button" data-type="listUstensils">
-            <label for="ustensils___place" id="ustensils__label" class="thirdButton">
-                <p class="text__button text__ustensil">Ustensiles</p>
-                <input type="text" placeholder="Rechercher un ustensil" id="ustensils__place">
-                <i class="fa-solid fa-chevron-down"></i>
-                <i class="fa-solid fa-chevron-up" style="display : none"></i>
-            </label>
-        </div>
+            <div class="firstRange">
+                <div class="button ingredient__button recipe__button" data-type="listIngredients">
+                    <label for="ingredients__place" id="ingrdients__label" class="firstButton">
+                        <p class="text__button text__ingredient">Ingredients</p>
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-up" style="display : none"></i>
+                    </label>
+                </div>
+        
+        
+        
+                <div class="button devices__button recipe__button" data-type="listAppliances">
+                        <label for="devices___place" id="devices__label" class="secondButton">
+                            <p class="text__button text__appliance">Appareils</p>
+                            <input type="text" placeholder="Rechercher un appareil" id="devices__place">
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <i class="fa-solid fa-chevron-up" style="display : none"></i>
+                        </label>
+                </div>
+        
+        
+                <div class="button tools__button recipe__button" data-type="listUstensils">
+                    <label for="ustensils___place" id="ustensils__label" class="thirdButton">
+                        <p class="text__button text__ustensil">Ustensiles</p>
+                        <input type="text" placeholder="Rechercher un ustensil" id="ustensils__place">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-up" style="display : none"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="secondRange">
+                <ul class="list listIngredients"></ul>
+                <ul class="list listAppliances"></ul>
+                <ul class="list listUstensils"></ul>
+            </div>
     </section>
-    <ul class="list listIngredients"></ul>
-    <ul class="list listAppliances"></ul>
-    <ul class="list listUstensils"></ul>
+    
+    
+
+    
+    
+    
     <main>
     </main>
 </body>

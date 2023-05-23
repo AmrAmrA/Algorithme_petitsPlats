@@ -84,8 +84,14 @@ body {
   /* ------------ Buttons range ----------------*/
   .buttons__range {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     margin: 12px 0px 0px 8.2%;
+  }
+
+  .firstRange, .secondRange {
+    display: flex;
+    flex-wrap: wrap;
   }
   .recipe__button {
     display: flex;
@@ -145,16 +151,13 @@ body {
   .listIngredients {
     display: flex;
     height: 370px;
-    width: 405px;
+    width: 222px;
     flex-wrap: wrap;
     background-color: #3282F7;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
     z-index: 3;
-    position: absolute;
-    margin-left: 8%;
-    margin-top: -1.2%;
-    display: none;
+    opacity: 0;
     overflow-x: auto;
     overflow-y: scroll;
   }
@@ -176,17 +179,16 @@ body {
   .listAppliances {
     display: flex;
     flex-direction: column;
-    height: 130px;
-    width: 450px;
+    height: 320px;
+    width: 240px;
     flex-wrap: wrap;
     background-color: #68D9A4;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
     z-index: 3;
-    position: absolute;
-    margin-left: 20.7%;
-    margin-top: -1.2%;
-    display: none;
+    opacity: 0;
+    margin-top: -19px;
+    margin-left: 13px;
   }
   .listAppliances li:hover {
     background-color: #b5e8c9;
@@ -198,16 +200,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 322px;
-    width: 707px;
+    width: 300px;
     flex-wrap: wrap;
     background-color: #ED6454;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
     z-index: 3;
-    position: absolute;
-    margin-left: 33.1%;
-    margin-top: -1.2%;
-    display: none;
+    opacity: 0;
+    margin-top: -19px;
+    margin-left: 8px;
   }
 
   .listUstensils li:hover {
@@ -223,7 +224,7 @@ body {
   }
 
   .display__list {
-    display: flex;
+    opacity: 1;
   }
   .display__text {
     display: none;
