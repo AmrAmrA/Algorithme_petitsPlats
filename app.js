@@ -173,3 +173,19 @@ buttons.forEach((button) => {
     document.querySelector(`.${type}`).classList.toggle("display__list");
   });
 });
+
+const toolsButton = document.querySelector(".tools__button");
+const redChevron  = document.querySelector(".red__chevron");
+toolsButton.addEventListener("click", () => {
+  toolsButton.classList.toggle("toolsButtonTransition");
+  redChevron.classList.toggle("rotateChevron");
+  }
+);
+
+// const html = document.querySelector("html");
+// console.log(html);
+// html.addEventListener("click", (e) => {
+//   toolsButton.classList.toggle("toolsButtonTransition")
+//   listUstensils.classList.remove("display__list");
+// }
+//   ); 

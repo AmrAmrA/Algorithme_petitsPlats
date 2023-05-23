@@ -121,6 +121,11 @@ body {
   }
   .tools__button {
     background-color: #ED6454;
+    width: 220px;
+    transition: width 1s;
+  }
+  .toolsButtonTransition {
+      width: 450px;
   }
 
   .fa-chevron-down {
@@ -198,11 +203,8 @@ body {
   
   
   .listUstensils {
-    display: flex;
-    flex-direction: column;
     height: 322px;
-    width: 300px;
-    flex-wrap: wrap;
+    width: 200px;
     background-color: #ED6454;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
@@ -210,6 +212,15 @@ body {
     z-index: 3;
     display: none;
     margin-top: -19px;
+    transition: width 1s, display 1s;
+  }
+  .chevron {
+    transform: rotate(0deg);
+    transition: transform 1s;
+  }
+
+  .rotateChevron {
+    transform: rotate(180deg);
   }
 
   .listUstensils li:hover {
@@ -226,6 +237,7 @@ body {
 
   .display__list {
     display: block;
+    width: 450px;
   }
   .display__text {
     display: none;
