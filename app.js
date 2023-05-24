@@ -146,6 +146,8 @@ displayInformations().then((data) => {
 
 // ------------- Buttons ranges // Labels ----------------- //
 const textIngredient    = document.querySelector(".text__ingredient");
+const textAppliance     = document.querySelector(".text__appliance"); 
+const textUstensil      = document.querySelector(".text__ustensil");
 const listUstensils     = document.querySelector(".listUstensils");
 const listAppliances    = document.querySelector(".listAppliances");
 const listIngredients   = document.querySelector(".listIngredients");
@@ -158,7 +160,10 @@ const greenChevron      = document.querySelector(".green__chevron");
 const blueChevron       = document.querySelector(".blue__chevron"); 
 const buttons           = document.querySelectorAll(".recipe__button");
 
-
+// Using Foreach to add an event listener to each button
+// When the user clicks on a button : 
+// The list of ingredients, appliances or ustensils will be displayed
+// And the chevron will rotate
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const type = button.getAttribute("data-type");
@@ -172,32 +177,52 @@ buttons.forEach((button) => {
         greenChevron.classList.remove         ("rotateChevron");
         ingredientsButton.classList.toggle    ("toolsButtonTransition");
         blueChevron.classList.toggle          ("rotateChevron");
+        textIngredient.classList.toggle       ("display__text");
+        if (textAppliance.classList.contains("display__text")) {
+          textAppliance.classList.remove("display__text");
+        } else if (textUstensil.classList.contains("display__text")) {
+          textUstensil.classList.remove("display__text");
+        }
 
         break;
 
 
         case 'listAppliances':
-        listUstensils.classList.remove    ("display__list");
-        listIngredients.classList.remove  ("display__list");
-        toolsButton.classList.remove      ("toolsButtonTransition");
+        listUstensils.classList.remove        ("display__list");
+        listIngredients.classList.remove      ("display__list");
+        toolsButton.classList.remove          ("toolsButtonTransition");
         ingredientsButton.classList.remove    ("toolsButtonTransition");
-        redChevron.classList.remove       ("rotateChevron");
-        blueChevron.classList.remove         ("rotateChevron");
-        devicesButton.classList.toggle    ("toolsButtonTransition");
-        greenChevron.classList.toggle     ("rotateChevron");
+        redChevron.classList.remove           ("rotateChevron");
+        blueChevron.classList.remove          ("rotateChevron");
+        devicesButton.classList.toggle        ("toolsButtonTransition");
+        greenChevron.classList.toggle         ("rotateChevron");
+        textAppliance.classList.toggle        ("display__text");
+        if (textIngredient.classList.contains("display__text")) {
+          textIngredient.classList.remove("display__text");
+        }
+        else if (textUstensil.classList.contains("display__text")) {
+          textUstensil.classList.remove("display__text");
+        }
         
         break;
 
 
         case 'listUstensils':
-          listIngredients.classList.remove  ("display__list");
-          listAppliances.classList.remove   ("display__list");
-          toolsButton.classList.toggle      ("toolsButtonTransition");
-          redChevron.classList.toggle       ("rotateChevron");
-          devicesButton.classList.remove    ("toolsButtonTransition");
+          listIngredients.classList.remove      ("display__list");
+          listAppliances.classList.remove       ("display__list");
+          toolsButton.classList.toggle          ("toolsButtonTransition");
+          redChevron.classList.toggle           ("rotateChevron");
+          devicesButton.classList.remove        ("toolsButtonTransition");
           ingredientsButton.classList.remove    ("toolsButtonTransition");
-          greenChevron.classList.remove     ("rotateChevron");
-          blueChevron.classList.remove         ("rotateChevron");
+          greenChevron.classList.remove         ("rotateChevron");
+          blueChevron.classList.remove          ("rotateChevron");
+          textUstensil.classList.toggle         ("display__text");
+          if (textIngredient.classList.contains("display__text")) {
+            textIngredient.classList.remove("display__text");
+          }
+          else if (textAppliance.classList.contains("display__text")) {
+            textAppliance.classList.remove("display__text");
+          }
         break;
     }
     document.querySelector(`.${type}`).classList.toggle("display__list");

@@ -84,7 +84,6 @@ body {
   /* ------------ Buttons range ----------------*/
   .buttons__range {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     margin: 12px 0px 0px 8.2%;
   }
