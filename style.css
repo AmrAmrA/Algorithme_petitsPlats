@@ -115,9 +115,13 @@ body {
 
   .ingredient__button {
     background-color: #3282F7;
+    width: 220px;
+    transition: width 1s;
   }
   .devices__button {
     background-color: #68D9A4;
+    width: 220px;
+    transition: width 1s;
   }
   .tools__button {
     background-color: #ED6454;

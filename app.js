@@ -150,42 +150,56 @@ const listUstensils     = document.querySelector(".listUstensils");
 const listAppliances    = document.querySelector(".listAppliances");
 const listIngredients   = document.querySelector(".listIngredients");
 const ingredientsInput  = document.querySelector('.firstButton input')
-const buttons = document.querySelectorAll(".recipe__button");
+const toolsButton       = document.querySelector(".tools__button");
+const devicesButton     = document.querySelector(".devices__button");
+const ingredientsButton = document.querySelector(".ingredient__button");
+const redChevron        = document.querySelector(".red__chevron");
+const greenChevron      = document.querySelector(".green__chevron");
+const blueChevron       = document.querySelector(".blue__chevron"); 
+const buttons           = document.querySelectorAll(".recipe__button");
+
+
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const type = button.getAttribute("data-type");
     switch(type){
       case 'listIngredients':
-        listUstensils.classList.remove("display__list");
-        listAppliances.classList.remove("display__list");
-        textIngredient.classList.toggle("display__text");
+        listUstensils.classList.remove        ("display__list");
+        listAppliances.classList.remove       ("display__list");
+        toolsButton.classList.remove          ("toolsButtonTransition");
+        redChevron.classList.remove           ("rotateChevron");
+        devicesButton.classList.remove        ("toolsButtonTransition");
+        greenChevron.classList.remove         ("rotateChevron");
+        ingredientsButton.classList.toggle    ("toolsButtonTransition");
+        blueChevron.classList.toggle          ("rotateChevron");
+
         break;
-      case 'listAppliances':
-        listUstensils.classList.remove("display__list");
-        listIngredients.classList.remove("display__list");
-   
+
+
+        case 'listAppliances':
+        listUstensils.classList.remove    ("display__list");
+        listIngredients.classList.remove  ("display__list");
+        toolsButton.classList.remove      ("toolsButtonTransition");
+        ingredientsButton.classList.remove    ("toolsButtonTransition");
+        redChevron.classList.remove       ("rotateChevron");
+        blueChevron.classList.remove         ("rotateChevron");
+        devicesButton.classList.toggle    ("toolsButtonTransition");
+        greenChevron.classList.toggle     ("rotateChevron");
+        
         break;
-      case 'listUstensils':
-        listIngredients.classList.remove("display__list");
-        listAppliances.classList.remove("display__list");
+
+
+        case 'listUstensils':
+          listIngredients.classList.remove  ("display__list");
+          listAppliances.classList.remove   ("display__list");
+          toolsButton.classList.toggle      ("toolsButtonTransition");
+          redChevron.classList.toggle       ("rotateChevron");
+          devicesButton.classList.remove    ("toolsButtonTransition");
+          ingredientsButton.classList.remove    ("toolsButtonTransition");
+          greenChevron.classList.remove     ("rotateChevron");
+          blueChevron.classList.remove         ("rotateChevron");
         break;
     }
     document.querySelector(`.${type}`).classList.toggle("display__list");
   });
 });
-
-const toolsButton = document.querySelector(".tools__button");
-const redChevron  = document.querySelector(".red__chevron");
-toolsButton.addEventListener("click", () => {
-  toolsButton.classList.toggle("toolsButtonTransition");
-  redChevron.classList.toggle("rotateChevron");
-  }
-);
-
-// const html = document.querySelector("html");
-// console.log(html);
-// html.addEventListener("click", (e) => {
-//   toolsButton.classList.toggle("toolsButtonTransition")
-//   listUstensils.classList.remove("display__list");
-// }
-//   ); 
