@@ -145,7 +145,8 @@ displayInformations().then((data) => {
 
 
 // ------------- Buttons ranges // Labels ----------------- //
-
+const labels = document.querySelectorAll("label");
+console.log(labels);
 // texts of the ingredients, appliances and ustensils 
 // who dissapear when the user clicks on the button
 const textIngredient    = document.querySelector(".text__ingredient");
@@ -177,9 +178,9 @@ const ustensilsInput    = document.querySelector(".ustensils__place");
 // When the user clicks on a button : 
 // The list of ingredients, appliances or ustensils will be displayed
 // And the chevron will rotate
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const type = button.getAttribute("data-type");
+labels.forEach((label) => {
+  label.addEventListener("click", () => {
+    const type = label.getAttribute("data-type");
     switch(type){
       case 'listIngredients':
         listUstensils.classList.remove        ("display__list");
@@ -233,21 +234,18 @@ buttons.forEach((button) => {
           blueChevron.classList.remove          ("rotateChevron");
           ingredientsInput.classList.remove     ("recipe__preparation");
           devicesInput.classList.remove         ("recipe__preparation");
-          ustensilsInput.classList.add       ("recipe__preparation");
-          toolsButton.classList.add          ("toolsButtonTransition");
-          redChevron.classList.add           ("rotateChevron");
-          textUstensil.classList.add         ("display__text");
-        
+          ustensilsInput.classList.toggle       ("recipe__preparation");
+          toolsButton.classList.toggle          ("toolsButtonTransition");
+          redChevron.classList.toggle           ("rotateChevron");
+          textUstensil.classList.toggle         ("display__text");
+          if (textIngredient.classList.contains("display__text")) {
+            textIngredient.classList.remove("display__text");
+          }
+          else if (textAppliance.classList.contains("display__text")) {
+            textAppliance.classList.remove("display__text");
+          }
         break;
     }
-    document.querySelector(`.${type}`).classList.add("display__list");
+    document.querySelector(`.${type}`).classList.toggle("display__list");
   });
-});
-
-redChevron.addEventListener("click", () => {
-      console.log(ustensilsInput.classList.contains("recipe__preparation") ? "true" : "false");
-      if (ustensilsInput.classList.contains("recipe__preparation")) {
-        ustensilsInput.classList.remove("recipe__preparation");
-        textUstensil.classList.remove("display__text");
-      }
 });

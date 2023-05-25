@@ -144,7 +144,7 @@ body {
     outline:        none;
     display:        none;
     font-size:      18px;
-    width:          250px;
+    width:          375px;
     height:         30px;
   }
 
@@ -169,7 +169,11 @@ body {
     width: 250px;
     height: 30px;
   }
-
+  /* .inputPlace {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  } */
  
   /* List of integredients sorted in alphabetic order  */
   .listIngredients {
@@ -188,7 +192,7 @@ body {
     margin-top: -19px;
   }
 
-  .firstButton, .secondButton, .thirdButton {
+  .ingredients__label, .devices__label, .ustensils__label {
     display: flex;
     justify-content: space-between;
     align-items: center;
