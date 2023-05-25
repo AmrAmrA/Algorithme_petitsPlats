@@ -151,7 +151,7 @@ const textUstensil      = document.querySelector(".text__ustensil");
 const listUstensils     = document.querySelector(".listUstensils");
 const listAppliances    = document.querySelector(".listAppliances");
 const listIngredients   = document.querySelector(".listIngredients");
-const ingredientsInput  = document.querySelector('.firstButton input')
+const ingredientsInput  = document.querySelector("#ingredients__place");
 const toolsButton       = document.querySelector(".tools__button");
 const devicesButton     = document.querySelector(".devices__button");
 const ingredientsButton = document.querySelector(".ingredient__button");
@@ -184,8 +184,8 @@ buttons.forEach((button) => {
           textUstensil.classList.remove("display__text");
         }
 
+        ingredientsInput.style.display = "flex";
         break;
-
 
         case 'listAppliances':
         listUstensils.classList.remove        ("display__list");
@@ -205,7 +205,6 @@ buttons.forEach((button) => {
         }
         
         break;
-
 
         case 'listUstensils':
           listIngredients.classList.remove      ("display__list");

@@ -135,7 +135,19 @@ body {
     color: aliceblue;
   }
 
-  .firstButton input, .secondButton input, .thirdButton input {
+   .secondButton input, .thirdButton input {
+    background-color: #3282F7;
+    color: #FFFFFF;
+    border: none; 
+    outline: none;
+    display: none;
+    font-size: 18px;
+    width: 250px;
+    height: 60px;
+  }
+
+
+  #ingredients__place {
     background-color: #3282F7;
     color: #FFFFFF;
     border: none; 
