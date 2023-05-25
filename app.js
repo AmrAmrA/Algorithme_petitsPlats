@@ -188,6 +188,9 @@ buttons.forEach((button) => {
         redChevron.classList.remove           ("rotateChevron");
         devicesButton.classList.remove        ("toolsButtonTransition");
         greenChevron.classList.remove         ("rotateChevron");
+        devicesInput.classList.remove         ("recipe__preparation");
+        ustensilsInput.classList.remove       ("recipe__preparation");
+        ingredientsInput.classList.toggle     ("recipe__preparation");
         ingredientsButton.classList.toggle    ("toolsButtonTransition");
         blueChevron.classList.toggle          ("rotateChevron");
         textIngredient.classList.toggle       ("display__text");
@@ -196,9 +199,6 @@ buttons.forEach((button) => {
         } else if (textUstensil.classList.contains("display__text")) {
           textUstensil.classList.remove("display__text");
         }
-        ingredientsInput.classList.toggle("recipe__preparation");
-        devicesInput.classList.remove("recipe__preparation");
-        ustensilsInput.classList.remove("recipe__preparation");
 
         break;
 
@@ -209,6 +209,9 @@ buttons.forEach((button) => {
         ingredientsButton.classList.remove    ("toolsButtonTransition");
         redChevron.classList.remove           ("rotateChevron");
         blueChevron.classList.remove          ("rotateChevron");
+        ingredientsInput.classList.remove     ("recipe__preparation");
+        ustensilsInput.classList.remove       ("recipe__preparation");
+        devicesInput.classList.toggle         ("recipe__preparation");
         devicesButton.classList.toggle        ("toolsButtonTransition");
         greenChevron.classList.toggle         ("rotateChevron");
         textAppliance.classList.toggle        ("display__text");
@@ -218,33 +221,33 @@ buttons.forEach((button) => {
         else if (textUstensil.classList.contains("display__text")) {
           textUstensil.classList.remove("display__text");
         }
-        ingredientsInput.classList.remove("recipe__preparation");
-        devicesInput.classList.toggle("recipe__preparation");
-        ustensilsInput.classList.remove("recipe__preparation");
 
         break;
 
         case 'listUstensils':
           listIngredients.classList.remove      ("display__list");
           listAppliances.classList.remove       ("display__list");
-          toolsButton.classList.toggle          ("toolsButtonTransition");
-          redChevron.classList.toggle           ("rotateChevron");
           devicesButton.classList.remove        ("toolsButtonTransition");
           ingredientsButton.classList.remove    ("toolsButtonTransition");
           greenChevron.classList.remove         ("rotateChevron");
           blueChevron.classList.remove          ("rotateChevron");
-          textUstensil.classList.toggle         ("display__text");
-          if (textIngredient.classList.contains("display__text")) {
-            textIngredient.classList.remove("display__text");
-          }
-          else if (textAppliance.classList.contains("display__text")) {
-            textAppliance.classList.remove("display__text");
-          }
-          ingredientsInput.classList.remove("recipe__preparation");
-          devicesInput.classList.remove("recipe__preparation");
-          ustensilsInput.classList.toggle("recipe__preparation");
+          ingredientsInput.classList.remove     ("recipe__preparation");
+          devicesInput.classList.remove         ("recipe__preparation");
+          ustensilsInput.classList.add       ("recipe__preparation");
+          toolsButton.classList.add          ("toolsButtonTransition");
+          redChevron.classList.add           ("rotateChevron");
+          textUstensil.classList.add         ("display__text");
+        
         break;
     }
-    document.querySelector(`.${type}`).classList.toggle("display__list");
+    document.querySelector(`.${type}`).classList.add("display__list");
   });
+});
+
+redChevron.addEventListener("click", () => {
+      console.log(ustensilsInput.classList.contains("recipe__preparation") ? "true" : "false");
+      if (ustensilsInput.classList.contains("recipe__preparation")) {
+        ustensilsInput.classList.remove("recipe__preparation");
+        textUstensil.classList.remove("display__text");
+      }
 });

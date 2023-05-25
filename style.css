@@ -139,13 +139,13 @@ body {
 
   .ingredients__place {
     background-color: #3282F7;
-    color: #FFFFFF;
-    border: none; 
-    outline: none;
-    display: none;
-    font-size: 18px;
-    width: 250px;
-    height: 60px;
+    color:          #FFFFFF;
+    border:         none; 
+    outline:        none;
+    display:        none;
+    font-size:      18px;
+    width:          250px;
+    height:         30px;
   }
 
   .devices__place { 
@@ -156,7 +156,7 @@ body {
     display: none;
     font-size: 18px;
     width: 250px;
-    height: 60px;
+    height: 30px;
   }
 
   .ustensils__place {
@@ -167,7 +167,7 @@ body {
     display: none;
     font-size: 18px;
     width: 250px;
-    height: 60px;
+    height: 30px;
   }
 
  
