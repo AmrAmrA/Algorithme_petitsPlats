@@ -249,3 +249,70 @@ labels.forEach((label) => {
     document.querySelector(`.${type}`).classList.toggle("display__list");
   });
 });
+
+
+// Adding items in the list of ingredients, appliances and ustensils
+const secondEmptyArray = [];
+function displayIngredients() {
+  const ingredients = document.querySelectorAll(".ingredient__name");
+  ingredients.forEach((ingredient) => {
+    secondEmptyArray.push(ingredient.textContent);
+  });
+  function removeDuplicates(secondEmptyArray) {
+    const unique = [];
+    secondEmptyArray.forEach((ingredientItem) => {
+      secondEmptyArray.sort((a, b) => a.localeCompare(b));
+      if (!unique.includes(ingredientItem)) {
+       
+        unique.push(ingredientItem);
+        listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
+      }
+    });
+    return unique;
+  }
+  removeDuplicates(secondEmptyArray);
+}
+setTimeout(displayIngredients, 200);
+
+// Creating list of appliances items
+let arrayConcated = [];
+displayInformations().then((data) => {
+  for (let i = 0; i < data.recipes.length; i++) {
+    appliancesArray = data.recipes[i].appliance;
+    arrayConcated = arrayConcated.concat(appliancesArray);
+  }
+  function removeDouble(arrayConcated) {
+    const unique = [];
+    arrayConcated.forEach((appliancesItems) => {
+      if (!unique.includes(appliancesItems)) {
+        unique.push(appliancesItems);
+        listAppliances.innerHTML += `<li> ${appliancesItems} </li>`;
+      }
+    });
+    return unique;
+  }
+  removeDouble(arrayConcated);
+});
+
+// Creating list of ustensils items
+let arrayConcatedUstensils = [];
+displayInformations().then((data) => {
+  for (let i = 0; i < data.recipes.length; i++) {
+    ustensilsArray = data.recipes[i].ustensils;
+    arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
+  }
+  function removeDouble(arrayConcatedUstensils) {
+    const unique = [];
+    arrayConcatedUstensils.forEach((ustensilsItems) => {
+      arrayConcatedUstensils.sort((a, b) => a.localeCompare(b));
+      const newSet = [...new Set(arrayConcatedUstensils)];
+      console.log(newSet);
+      if (!unique.includes(ustensilsItems)) {
+        unique.push(ustensilsItems);
+        listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
+      }
+    });
+    return unique;
+  }
+  removeDouble(arrayConcatedUstensils);
+});

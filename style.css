@@ -227,6 +227,8 @@ body {
     position: absolute;
     z-index: 3;
     display: none;
+    overflow-x: auto;
+    overflow-y: scroll;
     margin-top: -19px;
     transition: width 1s, display 1s;
   }
@@ -253,7 +255,9 @@ body {
   }
 
   .display__list {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     width: 450px;
   }
   .display__text {
