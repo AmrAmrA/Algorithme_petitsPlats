@@ -115,17 +115,17 @@ body {
   .ingredient__button {
     background-color: #3282F7;
     width: 220px;
-    transition: width 1s;
+    transition: width 0.2s;
   }
   .devices__button {
     background-color: #68D9A4;
     width: 220px;
-    transition: width 1s;
+    transition: width 0.2s;
   }
   .tools__button {
     background-color: #ED6454;
     width: 220px;
-    transition: width 1s;
+    transition: width 0.2s;
   }
   .toolsButtonTransition {
       width: 450px;
@@ -155,7 +155,7 @@ body {
     outline: none;
     display: none;
     font-size: 18px;
-    width: 250px;
+    width: 375px;
     height: 30px;
   }
 
@@ -166,14 +166,9 @@ body {
     outline: none;
     display: none;
     font-size: 18px;
-    width: 250px;
+    width: 375px;
     height: 30px;
   }
-  /* .inputPlace {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  } */
  
   /* List of integredients sorted in alphabetic order  */
   .listIngredients {
@@ -237,7 +232,8 @@ body {
   }
   .chevron {
     transform: rotate(0deg);
-    transition: transform 1s;
+    transition: transform 0.5s;
+    width: 40px;
   }
 
   .rotateChevron {
