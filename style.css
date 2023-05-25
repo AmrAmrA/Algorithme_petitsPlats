@@ -135,7 +135,9 @@ body {
     color: aliceblue;
   }
 
-   .secondButton input, .thirdButton input {
+
+
+  .ingredients__place {
     background-color: #3282F7;
     color: #FFFFFF;
     border: none; 
@@ -146,25 +148,27 @@ body {
     height: 60px;
   }
 
-
-  #ingredients__place {
-    background-color: #3282F7;
-    color: #FFFFFF;
-    border: none; 
-    outline: none;
-    display: none;
-    font-size: 18px;
-    width: 250px;
-    height: 60px;
-  }
-
-  .secondButton input {
+  .devices__place { 
     background-color: #68D9A4;
-  }
-  .thirdButton input {
-    background-color: #ED6454;
+    color: #FFFFFF;
+    border: none; 
+    outline: none;
+    display: none;
+    font-size: 18px;
+    width: 250px;
+    height: 60px;
   }
 
+  .ustensils__place {
+    background-color: #ED6454;
+    color: #FFFFFF;
+    border: none; 
+    outline: none;
+    display: none;
+    font-size: 18px;
+    width: 250px;
+    height: 60px;
+  }
 
  
   /* List of integredients sorted in alphabetic order  */
@@ -181,6 +185,7 @@ body {
     display: none;
     overflow-x: auto;
     overflow-y: scroll;
+    margin-top: -19px;
   }
 
   .firstButton, .secondButton, .thirdButton {
@@ -198,11 +203,8 @@ body {
 
 
   .listAppliances {
-    display: flex;
-    flex-direction: column;
     height: 320px;
     width: 220px;
-    flex-wrap: wrap;
     background-color: #68D9A4;
     color: #FFFFFF;
     font-family: 'Lato', 'sans-serif';
@@ -337,9 +339,6 @@ body {
   .ingredient__name {
     font-weight: 700;
   }
-
-
-
 
 
 

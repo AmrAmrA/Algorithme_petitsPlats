@@ -145,21 +145,34 @@ displayInformations().then((data) => {
 
 
 // ------------- Buttons ranges // Labels ----------------- //
+
+// texts of the ingredients, appliances and ustensils 
+// who dissapear when the user clicks on the button
 const textIngredient    = document.querySelector(".text__ingredient");
 const textAppliance     = document.querySelector(".text__appliance"); 
 const textUstensil      = document.querySelector(".text__ustensil");
+// Lists of the ingredients, appliances and ustensils
+// which will be displayed when the user clicks on the button
 const listUstensils     = document.querySelector(".listUstensils");
 const listAppliances    = document.querySelector(".listAppliances");
 const listIngredients   = document.querySelector(".listIngredients");
-const ingredientsInput  = document.querySelector("#ingredients__place");
+
+// Buttons of the ingredients, appliances and ustensils 
+// Which will display the list of ingredients, appliances and ustensils
 const toolsButton       = document.querySelector(".tools__button");
 const devicesButton     = document.querySelector(".devices__button");
 const ingredientsButton = document.querySelector(".ingredient__button");
+const buttons           = document.querySelectorAll(".recipe__button");
+//  Chevron of every button which will rotate when the user clicks on it
 const redChevron        = document.querySelector(".red__chevron");
 const greenChevron      = document.querySelector(".green__chevron");
-const blueChevron       = document.querySelector(".blue__chevron"); 
-const buttons           = document.querySelectorAll(".recipe__button");
+const blueChevron       = document.querySelector(".blue__chevron");
 
+// inputs of the ingredients, appliances and ustensils 
+// who appear when the user clicks on the button
+const ingredientsInput  = document.querySelector(".ingredients__place");
+const devicesInput      = document.querySelector(".devices__place");
+const ustensilsInput    = document.querySelector(".ustensils__place");
 // Using Foreach to add an event listener to each button
 // When the user clicks on a button : 
 // The list of ingredients, appliances or ustensils will be displayed
@@ -183,8 +196,10 @@ buttons.forEach((button) => {
         } else if (textUstensil.classList.contains("display__text")) {
           textUstensil.classList.remove("display__text");
         }
+        ingredientsInput.classList.toggle("recipe__preparation");
+        devicesInput.classList.remove("recipe__preparation");
+        ustensilsInput.classList.remove("recipe__preparation");
 
-        ingredientsInput.style.display = "flex";
         break;
 
         case 'listAppliances':
@@ -203,7 +218,10 @@ buttons.forEach((button) => {
         else if (textUstensil.classList.contains("display__text")) {
           textUstensil.classList.remove("display__text");
         }
-        
+        ingredientsInput.classList.remove("recipe__preparation");
+        devicesInput.classList.toggle("recipe__preparation");
+        ustensilsInput.classList.remove("recipe__preparation");
+
         break;
 
         case 'listUstensils':
@@ -222,6 +240,9 @@ buttons.forEach((button) => {
           else if (textAppliance.classList.contains("display__text")) {
             textAppliance.classList.remove("display__text");
           }
+          ingredientsInput.classList.remove("recipe__preparation");
+          devicesInput.classList.remove("recipe__preparation");
+          ustensilsInput.classList.toggle("recipe__preparation");
         break;
     }
     document.querySelector(`.${type}`).classList.toggle("display__list");
