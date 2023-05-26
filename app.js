@@ -251,27 +251,59 @@ labels.forEach((label) => {
 
 
 // Adding items in the list of ingredients, appliances and ustensils
-const secondEmptyArray = [];
-function displayIngredients() {
-  const ingredients = document.querySelectorAll(".ingredient__name");
-  ingredients.forEach((ingredient) => {
-    secondEmptyArray.push(ingredient.textContent);
-  });
-  function removeDuplicates(secondEmptyArray) {
-    const unique = [];
-    secondEmptyArray.forEach((ingredientItem) => {
-      secondEmptyArray.sort((a, b) => a.localeCompare(b));
-      if (!unique.includes(ingredientItem)) {
+// const secondEmptyArray = [];
+// function displayIngredients() {
+//   const ingredients = document.querySelectorAll(".ingredient__name");
+//   ingredients.forEach((ingredient) => {
+//     secondEmptyArray.push(ingredient.textContent);
+//   });
+//   function removeDuplicates(secondEmptyArray) {
+//     const unique = [];
+//     secondEmptyArray.forEach((ingredientItem) => {
+//       secondEmptyArray.sort((a, b) => a.localeCompare(b));
+//       if (!unique.includes(ingredientItem)) {
        
-        unique.push(ingredientItem);
-        listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
-      }
-    });
-    return unique;
+//         unique.push(ingredientItem);
+//         listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
+//       }
+//     });
+//     return unique;
+//   }
+//   removeDuplicates(secondEmptyArray);
+// }
+// setTimeout(displayIngredients, 200);
+
+// use an empty array to store the ustensils items
+let arrayConcatedIngredients= [];
+// Loop through the JSON Data File to extract only the utensil strings
+displayInformations().then((data) => {
+  for (let i = 0; i < data.recipes.length; i++) {
+    appliancesArray = data.recipes[i].ingredients.map((item) => item.ingredient);
+    arrayConcatedIngredients= arrayConcatedIngredients.concat(appliancesArray);
   }
-  removeDuplicates(secondEmptyArray);
-}
-setTimeout(displayIngredients, 200);
+   // We use lowercase in every item of the array in first time ...
+  function lowerCaseTheItem(arrayConcatedIngredients) {
+    const arrayLowercase = []
+    arrayConcatedIngredients.forEach((ingredientsItems) => {
+      const arrayIngredientsLowerCase = ingredientsItems.toLowerCase();
+      arrayLowercase.push(arrayIngredientsLowerCase);
+    });
+    // ... and then we remove the duplicates, 
+    // and we sort the array alphabetically
+    // finally we display the items in the list 
+    const arraySorted = [...new Set(arrayLowercase)];
+    arraySorted.sort((a, b) => a.localeCompare(b));
+    arraySorted.forEach((ingredientsItems) => {
+      listIngredients.innerHTML += `<li> ${ingredientsItems.charAt(0).toUpperCase() + ingredientsItems.slice(1)} </li>`;
+  })};
+  lowerCaseTheItem(arrayConcatedIngredients);
+});
+
+
+
+
+
+
 
 // use an empty array to store the ustensils items
 let arrayConcatedAppliances= [];
