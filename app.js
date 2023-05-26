@@ -377,3 +377,31 @@ ustensilsInput.addEventListener("input", (e) => {
     }
   });
 });
+
+const querySection = document.querySelector(".query__section");
+// Select with the click the item in the list
+function searchByIngredientsButton() {
+  const ingredientsItems = document.querySelectorAll(".listIngredients li");
+  ingredientsItems.forEach((ingredientItem) => {
+    ingredientItem.addEventListener("click", () => {
+        const ingredientSpan = ingredientItem;
+        querySection.appendChild(ingredientSpan);
+        ingredientSpan.classList.add("ingredients__selected__setup");
+      });
+    })};
+  setTimeout(searchByIngredientsButton, 500);
+
+  const recipe_cards = document.querySelectorAll(".recipe__card");
+      function displayRecipes() {
+        if (searchByIngredientsButton) {
+          recipe_cards.forEach((recipe_card) => {
+            if (recipe_card.textContent.toLocaleLowerCase()
+            .includes(ingredientItem.outerText)) {
+              recipe_card.style.display = "block";
+            } else {
+              recipe_card.style.display = "none";
+            }
+
+      })};
+      }
+      setTimeout(displayRecipes, 500);
