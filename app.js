@@ -72,7 +72,7 @@ displayInformations().then((data) => {
   // and use flat method to remove the nested arrays
   const newArrayWithoutDuplicates = [...new Set(emptyArray)];
   const LatestArrayVersion = newArrayWithoutDuplicates.flat();
-  
+
   
   
   
@@ -250,32 +250,11 @@ labels.forEach((label) => {
 });
 
 
-// Adding items in the list of ingredients, appliances and ustensils
-// const secondEmptyArray = [];
-// function displayIngredients() {
-//   const ingredients = document.querySelectorAll(".ingredient__name");
-//   ingredients.forEach((ingredient) => {
-//     secondEmptyArray.push(ingredient.textContent);
-//   });
-//   function removeDuplicates(secondEmptyArray) {
-//     const unique = [];
-//     secondEmptyArray.forEach((ingredientItem) => {
-//       secondEmptyArray.sort((a, b) => a.localeCompare(b));
-//       if (!unique.includes(ingredientItem)) {
-       
-//         unique.push(ingredientItem);
-//         listIngredients.innerHTML += `<li> ${ingredientItem.replace(':', '')} </li>`;
-//       }
-//     });
-//     return unique;
-//   }
-//   removeDuplicates(secondEmptyArray);
-// }
-// setTimeout(displayIngredients, 200);
 
-// use an empty array to store the ustensils items
+
+// use an empty array to store the ingredients items
 let arrayConcatedIngredients= [];
-// Loop through the JSON Data File to extract only the utensil strings
+// Loop through the JSON Data File to extract only the ingredients strings
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
     appliancesArray = data.recipes[i].ingredients.map((item) => item.ingredient);
@@ -301,13 +280,9 @@ displayInformations().then((data) => {
 
 
 
-
-
-
-
-// use an empty array to store the ustensils items
+// use an empty array to store the appliances items
 let arrayConcatedAppliances= [];
-// Loop through the JSON Data File to extract only the utensil strings
+// Loop through the JSON Data File to extract only the appliances strings
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
     appliancesArray = data.recipes[i].appliance;
@@ -356,4 +331,47 @@ displayInformations().then((data) => {
     listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
   })};
   lowerCaseTheItem(arrayConcatedUstensils);
+});
+
+
+// Searching in the input field of every label
+
+devicesInput.addEventListener("input", (e) => {
+  const devicesInputValue = e.target.value.toLowerCase();
+  const appliancesLI = document.querySelectorAll(".listAppliances li");
+  appliancesLI.forEach((item) => {
+    if (item.textContent.toLowerCase().includes(devicesInputValue)) {
+      item.style.display = "block";
+    }
+    else {
+      item.style.display = "none";
+    }
+  });
+
+});
+// Do the same same function for ingredients and ustensils
+ingredientsInput.addEventListener("input", (e) => {
+  const ingredientsInputValue = e.target.value.toLowerCase();
+  const ingredientsLI = document.querySelectorAll(".listIngredients li");
+  ingredientsLI.forEach((item) => {
+    if (item.textContent.toLowerCase().includes(ingredientsInputValue)) {
+      item.style.display = "block";
+    }
+    else {
+      item.style.display = "none";
+    }
+  });
+});
+
+ustensilsInput.addEventListener("input", (e) => {
+  const ustensilsInputValue = e.target.value.toLowerCase();
+  const ustensilsLI = document.querySelectorAll(".listUstensils li");
+  ustensilsLI.forEach((item) => {
+    if (item.textContent.toLowerCase().includes(ustensilsInputValue)) {
+      item.style.display = "block";
+    }
+    else {
+      item.style.display = "none";
+    }
+  });
 });
