@@ -293,23 +293,28 @@ displayInformations().then((data) => {
   removeDouble(arrayConcated);
 });
 
-// Creating list of ustensils items
+// use an empty array to store the ustensils items
 let arrayConcatedUstensils = [];
+// Loop through the JSON Data File to extract only the utensil strings
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
     ustensilsArray = data.recipes[i].ustensils;
     arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
   }
-  function removeDouble(arrayConcatedUstensils) {
+  // We use lowercase in every item of the array in first time ...
+  function lowerCaseTheItem(arrayConcatedUstensils) {
     const arrayLowercase = []
     arrayConcatedUstensils.forEach((ustensilsItems) => {
       const arrayUstensilLowerCase = ustensilsItems.toLowerCase();
       arrayLowercase.push(arrayUstensilLowerCase);
     });
+    // ... and then we remove the duplicates, 
+    // and we sort the array alphabetically
+    // finally we display the items in the list 
     const nouveauTableau = [...new Set(arrayLowercase)];
     nouveauTableau.sort((a, b) => a.localeCompare(b));
-    console.log(Object.values(nouveauTableau))
+    nouveauTableau.forEach((ustensilsItems) => {
     listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
-  }
-  removeDouble(arrayConcatedUstensils);
+  })};
+  lowerCaseTheItem(arrayConcatedUstensils);
 });

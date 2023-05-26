@@ -250,7 +250,7 @@ body {
   .listIngredients li, 
   .listAppliances li, 
   .listUstensils li {
-    margin : 13px 5px 2px 10px;
+    margin : 15px 65px 2px 10px;
     cursor: pointer;
   }
 
