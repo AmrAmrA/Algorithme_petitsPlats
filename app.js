@@ -273,25 +273,32 @@ function displayIngredients() {
 }
 setTimeout(displayIngredients, 200);
 
-// Creating list of appliances items
-let arrayConcated = [];
+// use an empty array to store the ustensils items
+let arrayConcatedAppliances= [];
+// Loop through the JSON Data File to extract only the utensil strings
 displayInformations().then((data) => {
   for (let i = 0; i < data.recipes.length; i++) {
     appliancesArray = data.recipes[i].appliance;
-    arrayConcated = arrayConcated.concat(appliancesArray);
+    arrayConcatedAppliances= arrayConcatedAppliances.concat(appliancesArray);
   }
-  function removeDouble(arrayConcated) {
-    const unique = [];
-    arrayConcated.forEach((appliancesItems) => {
-      if (!unique.includes(appliancesItems)) {
-        unique.push(appliancesItems);
-        listAppliances.innerHTML += `<li> ${appliancesItems} </li>`;
-      }
+   // We use lowercase in every item of the array in first time ...
+  function lowerCaseTheItem(arrayConcatedAppliances) {
+    const arrayLowercase = []
+    arrayConcatedAppliances.forEach((appliancesItems) => {
+      const arrayApplianceLowerCase = appliancesItems.toLowerCase();
+      arrayLowercase.push(arrayApplianceLowerCase);
     });
-    return unique;
-  }
-  removeDouble(arrayConcated);
+    // ... and then we remove the duplicates, 
+    // and we sort the array alphabetically
+    // finally we display the items in the list 
+    const arraySorted = [...new Set(arrayLowercase)];
+    arraySorted.sort((a, b) => a.localeCompare(b));
+    arraySorted.forEach((appliancesItems) => {
+      listAppliances.innerHTML += `<li> ${appliancesItems.charAt(0).toUpperCase() + appliancesItems.slice(1)} </li>`;
+  })};
+  lowerCaseTheItem(arrayConcatedAppliances);
 });
+
 
 // use an empty array to store the ustensils items
 let arrayConcatedUstensils = [];
@@ -311,9 +318,9 @@ displayInformations().then((data) => {
     // ... and then we remove the duplicates, 
     // and we sort the array alphabetically
     // finally we display the items in the list 
-    const nouveauTableau = [...new Set(arrayLowercase)];
-    nouveauTableau.sort((a, b) => a.localeCompare(b));
-    nouveauTableau.forEach((ustensilsItems) => {
+    const arraySorted = [...new Set(arrayLowercase)];
+    arraySorted.sort((a, b) => a.localeCompare(b));
+    arraySorted.forEach((ustensilsItems) => {
     listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
   })};
   lowerCaseTheItem(arrayConcatedUstensils);
