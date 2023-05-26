@@ -146,7 +146,6 @@ displayInformations().then((data) => {
 
 // ------------- Buttons ranges // Labels ----------------- //
 const labels = document.querySelectorAll("label");
-console.log(labels);
 // texts of the ingredients, appliances and ustensils 
 // who dissapear when the user clicks on the button
 const textIngredient    = document.querySelector(".text__ingredient");
@@ -302,17 +301,15 @@ displayInformations().then((data) => {
     arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
   }
   function removeDouble(arrayConcatedUstensils) {
-    const unique = [];
+    const arrayLowercase = []
     arrayConcatedUstensils.forEach((ustensilsItems) => {
-      arrayConcatedUstensils.sort((a, b) => a.localeCompare(b));
-      const newSet = [...new Set(arrayConcatedUstensils)];
-      console.log(newSet);
-      if (!unique.includes(ustensilsItems)) {
-        unique.push(ustensilsItems);
-        listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
-      }
+      const arrayUstensilLowerCase = ustensilsItems.toLowerCase();
+      arrayLowercase.push(arrayUstensilLowerCase);
     });
-    return unique;
+    const nouveauTableau = [...new Set(arrayLowercase)];
+    nouveauTableau.sort((a, b) => a.localeCompare(b));
+    console.log(Object.values(nouveauTableau))
+    listUstensils.innerHTML += `<li> ${ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)} </li>`;
   }
   removeDouble(arrayConcatedUstensils);
 });
