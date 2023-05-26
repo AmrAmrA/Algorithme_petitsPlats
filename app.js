@@ -336,6 +336,8 @@ displayInformations().then((data) => {
 
 // Searching in the input field of every label
 
+
+// For Devices(or appliances) labels
 devicesInput.addEventListener("input", (e) => {
   const devicesInputValue = e.target.value.toLowerCase();
   const appliancesLI = document.querySelectorAll(".listAppliances li");
@@ -349,7 +351,7 @@ devicesInput.addEventListener("input", (e) => {
   });
 
 });
-// Do the same same function for ingredients and ustensils
+// For Ingredients labels
 ingredientsInput.addEventListener("input", (e) => {
   const ingredientsInputValue = e.target.value.toLowerCase();
   const ingredientsLI = document.querySelectorAll(".listIngredients li");
@@ -362,7 +364,7 @@ ingredientsInput.addEventListener("input", (e) => {
     }
   });
 });
-
+// For Ustensils labels
 ustensilsInput.addEventListener("input", (e) => {
   const ustensilsInputValue = e.target.value.toLowerCase();
   const ustensilsLI = document.querySelectorAll(".listUstensils li");
