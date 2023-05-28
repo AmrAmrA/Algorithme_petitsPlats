@@ -388,6 +388,7 @@ function searchByIngredientsButton() {
   ingredientsItems.forEach((ingredientItem) => {
     ingredientItem.addEventListener("click", () => {
       ingredientItem.style.pointerEvents = "none";
+       ingredientItem.classList.add("selected__item");
         const ingredientSpan = ingredientItem;
         badgeSelected.innerHTML 
         += `<div class="badge__selected__setup">
@@ -397,16 +398,17 @@ function searchByIngredientsButton() {
            `;
        
            const closeItems = document.querySelectorAll(".close__item");
-           const badgeIngredients = document.querySelectorAll(".badge__selected__setup");
-           const ingredientItems = document.querySelectorAll(".listIngredients li");
+           const allSelectedItems = document.querySelectorAll(".selected__item");
             closeItems.forEach((closeItem) => {
               closeItem.addEventListener("click", () => {
               closeItem.parentNode.style.display = "none";
-              console.log(closeItem.parentNode.textContent);
-              console.log(ingredientItem.textContent);
-                  if(ingredientItem.textContent === closeItem.parentNode.textContent) {
-                      console.log('ok');
-              }});
+               allSelectedItems.forEach((selectedItem) => {
+                if( selectedItem.classList.contains('selected__item') && 
+                selectedItem.textContent === closeItem.parentNode.textContent ) {
+                  selectedItem.style.pointerEvents = "auto";
+                  selectedItem.classList.remove("selected__item");
+                }})
+            })
             });
     })})};
   setTimeout(searchByIngredientsButton, 500);
