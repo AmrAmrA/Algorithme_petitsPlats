@@ -387,6 +387,7 @@ function searchByIngredientsButton() {
   const ingredientsItems = document.querySelectorAll(".listIngredients li");
   ingredientsItems.forEach((ingredientItem) => {
     ingredientItem.addEventListener("click", () => {
+      ingredientItem.style.pointerEvents = "none";
         const ingredientSpan = ingredientItem;
         badgeSelected.innerHTML 
         += `<div class="badge__selected__setup">

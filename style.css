@@ -71,19 +71,6 @@ body {
     margin: 0px 0px 0px 8.2%;
   }
 
-  /* .ingredients__selected__setup {
-    background-color: #3282F7;
-    color: #FFFFFF;
-    border-radius: 5px;
-    font-family: 'Lato', 'sans-serif';
-    margin-right: 8px;
-    padding: 12px;
-    text-align: center;
-    height: 37px;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  } */
   .badge__selected__setup {
     background-color: #3282F7;
     color: #FFFFFF;
