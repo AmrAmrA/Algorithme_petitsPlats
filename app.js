@@ -273,7 +273,7 @@ displayInformations().then((data) => {
     const arraySorted = [...new Set(arrayLowercase)];
     arraySorted.sort((a, b) => a.localeCompare(b));
     arraySorted.forEach((ingredientsItems) => {
-      listIngredients.innerHTML += `<li> ${ingredientsItems.charAt(0).toUpperCase() + ingredientsItems.slice(1)} </li>`;
+      listIngredients.innerHTML += `<li class = "ingredientItem"> ${ingredientsItems.charAt(0).toUpperCase() + ingredientsItems.slice(1)} </li>`;
   })};
   lowerCaseTheItem(arrayConcatedIngredients);
 });
@@ -392,10 +392,21 @@ function searchByIngredientsButton() {
         badgeSelected.innerHTML 
         += `<div class="badge__selected__setup">
            <span class="ingredients__span">${ingredientSpan.textContent}</span>
-           <i class="fa-regular fa-circle-xmark"></i>
+           <i class="fa-regular fa-circle-xmark close__item"></i>
             </div>
            `;
        
-      });
-    })};
+           const closeItems = document.querySelectorAll(".close__item");
+           const badgeIngredients = document.querySelectorAll(".badge__selected__setup");
+           const ingredientItems = document.querySelectorAll(".listIngredients li");
+            closeItems.forEach((closeItem) => {
+              closeItem.addEventListener("click", () => {
+              closeItem.parentNode.style.display = "none";
+              console.log(closeItem.parentNode.textContent);
+              console.log(ingredientItem.textContent);
+                  if(ingredientItem.textContent === closeItem.parentNode.textContent) {
+                      console.log('ok');
+              }});
+            });
+    })})};
   setTimeout(searchByIngredientsButton, 500);
