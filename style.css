@@ -99,6 +99,9 @@ body {
     text-align: center;
   }
 
+  .hide {
+    display: none;
+  }
 
   /* ------------ Buttons range ----------------*/
   .buttons__range {

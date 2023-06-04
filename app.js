@@ -426,7 +426,10 @@ function searchByIngredientsButton() {
   ingredientsItems.forEach((ingredientItem) => {
     ingredientItem.addEventListener("click", () => {
       ingredientItem.style.pointerEvents = "none";
-      //  ingredientItem.classList.add("selected__item");
+      ingredientItem.classList.add("hide");
+
+      // Update ingredientsItems List
+      updateIngredientsList(ingredientItem.outerText) // Argument
       const ingredientSpan = ingredientItem;
       // Creation of the badge
       badgeSelected.innerHTML += `<div class="badge__selected__setup">
@@ -436,84 +439,45 @@ function searchByIngredientsButton() {
             `;
       const closeItems = document.querySelectorAll(".close__item");
       const allSelectedItems = document.querySelectorAll(".selected__item");
-      // console.log(ingredientSpan.textContent);
-      const emptyArray = [];
-      displayInformations().then((data) => {
-        // First step: create an array with all the ingredients, appliances and ustensils
-        for (recipe of data.recipes) {
-          emptyArray.push(recipe.appliance);
-          emptyArray.push(recipe.ustensils);
-
-          for (const ingredients of recipe.ingredients) {
-            emptyArray.push(ingredients.ingredient);
-          }
-        }
-
-        // Second step: remove the duplicates from the array
-        // and use flat method to remove the nested arrays
-        const newArrayWithoutDuplicates = [...new Set(emptyArray)];
-        const LatestArrayVersion = newArrayWithoutDuplicates.flat();
-        console.log(LatestArrayVersion);
-
-        const main = document.querySelector("main");
-        main.innerHTML = "";
-        if (LatestArrayVersion.includes(ingredientSpan.textContent)) {
-        for (oneRecipe of data.recipes) {
-        const article = document.createElement("article");
-        article.classList.add("recipe__card");
-        const flatUstensils = oneRecipe.ustensils.flat();
-        const IngredientsArray = [];
-        for (const ingredient of oneRecipe.ingredients) {
-          IngredientsArray.push(ingredient.ingredient);
-        }
-          if (
-          IngredientsArray.includes(ingredientSpan.textContent)
-          ) {
-          main.appendChild(article);
-          article.innerHTML = `
-            <div class = 'fake__image' > </div>
-            <div class = 'recipe__body   ${oneRecipe.appliance}'> 
-            <div class = 'recipe__header'>
-            <h1 class = "recipe__title"> ${oneRecipe.name} </h1>
-            <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
-              oneRecipe.time
-            } min </span>
-            </div>
-            <div class = "recipe__preparation">
-             <ul>
-                ${oneRecipe.ingredients
-                  .map(
-                    (ingredient) =>
-                      `<li>  
-                     <span class = "ingredient__name">  ${
-                       ingredient.ingredient
-                     }  </span>   
-                    <span> : ${
-                      ingredient.quantity ? ingredient.quantity : ""
-                    } </span> 
-                    <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
-                    </li>`
-                  )
-                  .join("")}
-                
-             </ul>
-             <p class = "recipe__ingredients">
-             ${oneRecipe.description}
-             </p>
-            </div>
-        </div>
-        `;
-        }}};
-        
-
-        closeItems.forEach((closeItem) => {
-          closeItem.addEventListener("click", () => {
-            closeItem.parentNode.style.display = "none";
-            ingredientItem.style.pointerEvents = "auto";
-          });
+      closeItems.forEach((closeItem) => {
+        closeItem.addEventListener("click", () => {
+          closeItem.parentNode.style.display = "none";
+          ingredientItem.style.pointerEvents = "auto";
         });
       });
     });
   });
 }
 setTimeout(searchByIngredientsButton, 500);
+
+function updateIngredientsList(ingredient){ // paramètre
+  const ingredientStringified = ingredient.trim().toString();
+  displayInformations().then((data) => {
+    const nestedArray = [];
+    for (recipe of data.recipes) {
+            nestedArray.push(recipe.ingredients.map((ingredient) => ingredient.ingredient));
+          }
+          
+        for(let i = 0; i < nestedArray.length; i++) {
+              if(nestedArray[i].includes(ingredientStringified)){
+                console.log(nestedArray[i]);
+              }
+          
+        }
+
+         
+    });
+    // Second step: remove the duplicates from the array
+    // and use flat method to remove the nested arrays
+
+
+}
+
+
+
+
+
+function updateAppliancesList(appliance = null){
+  // Si appliance == null, on met simplement à jour la liste des appareils
+
+}
