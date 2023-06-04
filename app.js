@@ -430,6 +430,7 @@ function searchByIngredientsButton() {
 
       // Update ingredientsItems List
       updateIngredientsList(ingredientItem.outerText) // Argument
+      updateAppliancesList(ingredientItem.outerText) // Argument
       const ingredientSpan = ingredientItem;
       // Creation of the badge
       badgeSelected.innerHTML += `<div class="badge__selected__setup">
@@ -450,34 +451,47 @@ function searchByIngredientsButton() {
 }
 setTimeout(searchByIngredientsButton, 500);
 
-function updateIngredientsList(ingredient){ // paramètre
+const nestedIngredientsArray = [];
+const IngredientsWithoutDuplicates = [];
+
+function updateIngredientsList(ingredient) {
+  // We erase the space at the beginning and at the end of the string
+  // and we convert the string into a string
+  // to make sure that the string is strictly equal to arrays items
   const ingredientStringified = ingredient.trim().toString();
+  // we loopp through the JSON Data File and the nested arrays
   displayInformations().then((data) => {
-    const nestedArray = [];
     for (recipe of data.recipes) {
-            nestedArray.push(recipe.ingredients.map((ingredient) => ingredient.ingredient));
-          }
-          
-        for(let i = 0; i < nestedArray.length; i++) {
-              if(nestedArray[i].includes(ingredientStringified)){
-                console.log(nestedArray[i]);
-              }
-          
+      nestedIngredientsArray.push(
+        recipe.ingredients.map((ingredient) => ingredient.ingredient)
+      );
+    }
+    // we delete the duplicates and we sort the array alphabetically
+    // finally we display the items in the HTML list
+    for (let i = 0; i < nestedIngredientsArray.length; i++) {
+      if (nestedIngredientsArray[i].includes(ingredientStringified)) {
+        IngredientsWithoutDuplicates.push(nestedIngredientsArray[i]);
+        const arrayFlattened = IngredientsWithoutDuplicates.flat();
+        const newArray = [...new Set(arrayFlattened)].sort();
+        listIngredients.innerHTML = "";
+        for (let i = 0; i < newArray.length; i++) {
+          listIngredients.innerHTML += `<li class = "ingredientItem"> ${newArray[i]} </li>`;
         }
-
-         
-    });
-    // Second step: remove the duplicates from the array
-    // and use flat method to remove the nested arrays
-
-
+      }
+    }
+  });
 }
 
 
 
 
 
-function updateAppliancesList(appliance = null){
-  // Si appliance == null, on met simplement à jour la liste des appareils
+function updateAppliancesList(ingredient){
+  const ingredientStringified = ingredient.trim().toString();
+
+  displayInformations().then((data) => {
+    for (recipe of data.recipes) {
+          console.log(recipe);
+    }})
 
 }
