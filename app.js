@@ -430,7 +430,6 @@ function searchByIngredientsButton() {
 
       // Update ingredientsItems List
       updateIngredientsList(ingredientItem.outerText) // Argument
-      updateAppliancesList(ingredientItem.outerText) // Argument
       const ingredientSpan = ingredientItem;
       // Creation of the badge
       badgeSelected.innerHTML += `<div class="badge__selected__setup">
@@ -480,6 +479,7 @@ function updateIngredientsList(ingredient) {
       }
     }
   });
+  updateAppliancesList(ingredient) // Argument
 }
 
 
@@ -487,11 +487,11 @@ function updateIngredientsList(ingredient) {
 
 
 function updateAppliancesList(ingredient){
-  const ingredientStringified = ingredient.trim().toString();
+  console.log(ingredient);
 
   displayInformations().then((data) => {
     for (recipe of data.recipes) {
-          console.log(recipe);
+      console.log(recipe);
     }})
 
 }
