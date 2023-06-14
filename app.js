@@ -12,7 +12,7 @@ async function displayInformations() {
 }
 
 // Tu as toujours ton AllRecipes qui contient toutes les recettes
-const filteredRecipes = []
+const filteredRecipes = [];
 // FilterdRecipes est un tableau qui va contenir une copie de AllRecipes
 // Lorsque tu dois filtrer et du coup afficher sur le DOM, c'est sur FilteredRecipes que tu dois travailler
 
@@ -438,7 +438,7 @@ function searchByIngredientsButton() {
       ingredientItem.classList.add("hide");
 
       // Update ingredientsItems List
-      updateIngredientsList(ingredientItem.outerText) // Argument
+      updateIngredientsList(ingredientItem.outerText); // Argument
       const ingredientSpan = ingredientItem;
       // Creation of the badge
       badgeSelected.innerHTML += `<div class="badge__selected__setup">
@@ -474,7 +474,7 @@ function updateIngredientsList(ingredient) {
 
   // A la suppression d'un tag
   // Tu fais la recherches dans ton tableau original et tu mets à jour filteredRecipes
-    // Tu vérifie dans nestedIngredientsArray ce qui est présent et tu effectues une nouvelles recherches
+  // Tu vérifie dans nestedIngredientsArray ce qui est présent et tu effectues une nouvelles recherches
 
   displayInformations().then((data) => {
     for (recipe of data.recipes) {
@@ -496,13 +496,10 @@ function updateIngredientsList(ingredient) {
       }
     }
   });
-  updateAppliancesList(ingredient) // Argument
-  updateUstensilsList(ingredient) // Argument
+  updateAppliancesList(ingredient); // Argument
+  updateUstensilsList(ingredient); // Argument
+  updateDOM(ingredient); // Argument
 }
-
-
-
-
 
 function updateAppliancesList(ingredientSelected) {
   // we prepare an empty array to push the appliances
@@ -533,49 +530,117 @@ function updateAppliancesList(ingredientSelected) {
 }
 
 // we display the appliances in the HTML list
-  function displayAppliances(appliancesWithoutDuplicates){
-   listAppliances.innerHTML = "";
-   for (let i = 0; i < appliancesWithoutDuplicates.length; i++) {
-     listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicates[i]} </li>`;
-   }
-  } 
+function displayAppliances(appliancesWithoutDuplicates) {
+  listAppliances.innerHTML = "";
+  for (let i = 0; i < appliancesWithoutDuplicates.length; i++) {
+    listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicates[i]} </li>`;
+  }
+}
 
+function updateUstensilsList(ingredientSelected) {
+  // we prepare an empty array to push the ustensils
+  // that correspond to the ingredient selected
+  const arrayUstensils = [];
+  // We erase the space at the beginning and at the end of the string
+  // and we convert the string into a string
+  // to make sure that the string is strictly equal to arrays items
+  const ingredientStringified = ingredientSelected.trim().toString();
 
-  function updateUstensilsList (ingredientSelected) {
-    // we prepare an empty array to push the ustensils
-    // that correspond to the ingredient selected
-    const arrayUstensils = [];
-    // We erase the space at the beginning and at the end of the string
-    // and we convert the string into a string
-    // to make sure that the string is strictly equal to arrays items
-    const ingredientStringified = ingredientSelected.trim().toString();
-  
-    // we loopp through the JSON Data File
-    // to check if the ingredient selected is present in the recipes
-    displayInformations().then((data) => {
-      for (recipe of data.recipes) {
-        const ArrayMapped = recipe.ingredients.map(
-          (ingredient) => ingredient.ingredient
-        );
-        // if the ingredient selected is present in the recipes
-        // we push the ustensil in the empty array
-        if (ArrayMapped.includes(ingredientStringified)) {
-          arrayUstensils.push(recipe.ustensils);
-        }
-        // we sort the array alphabetically and flat the nested arrays
-        const ustensilsflattered = arrayUstensils.sort().flat();
-        
-        // we delete the ustensils dupplicates
-        const ustensilsWithoutDuplicates =[...new Set(ustensilsflattered)];
-        displayUstensils(ustensilsWithoutDuplicates);
+  // we loopp through the JSON Data File
+  // to check if the ingredient selected is present in the recipes
+  displayInformations().then((data) => {
+    for (recipe of data.recipes) {
+      const ArrayMapped = recipe.ingredients.map(
+        (ingredient) => ingredient.ingredient
+      );
+      // if the ingredient selected is present in the recipes
+      // we push the ustensil in the empty array
+      if (ArrayMapped.includes(ingredientStringified)) {
+        arrayUstensils.push(recipe.ustensils);
       }
-    });
-  }
+      // we sort the array alphabetically and flat the nested arrays
+      const ustensilsflattered = arrayUstensils.sort().flat();
 
-  // we display the ustensils in the HTML list
-  function displayUstensils(ustensilsWithoutDuplicates){
-    listUstensils.innerHTML = "";
-    for (let i = 0; i < ustensilsWithoutDuplicates.length; i++) {
-      listUstensils.innerHTML += `<li class = "ustensilItem"> ${ustensilsWithoutDuplicates[i]} </li>`;
+      // we delete the ustensils dupplicates
+      const ustensilsWithoutDuplicates = [...new Set(ustensilsflattered)];
+      displayUstensils(ustensilsWithoutDuplicates);
     }
+  });
+}
+
+// we display the ustensils in the HTML list
+function displayUstensils(ustensilsWithoutDuplicates) {
+  listUstensils.innerHTML = "";
+  for (let i = 0; i < ustensilsWithoutDuplicates.length; i++) {
+    listUstensils.innerHTML += `<li class = "ustensilItem"> ${ustensilsWithoutDuplicates[i]} </li>`;
   }
+}
+
+function updateDOM(ingredientSelected) {
+  // we prepare an empty array to push the recipes
+  // that correspond to the ingredient selected
+  const arrayRecipes = [];
+  // We erase the space at the beginning and at the end of the string
+  // and we convert the string into a string
+  // to make sure that the string is strictly equal to arrays items
+  const ingredientStringified = ingredientSelected.trim().toString();
+
+  // we loopp through the JSON Data File
+  // to check if the ingredient selected is present in the recipes
+  displayInformations().then((data) => {
+    for (recipe of data.recipes) {
+      const ArrayMapped = recipe.ingredients.map(
+        (ingredient) => ingredient.ingredient
+      );
+      // if the ingredient selected is present in the recipes
+      // we push the recipe in the empty array
+      if (ArrayMapped.includes(ingredientStringified)) {
+        arrayRecipes.push(recipe);
+      }
+      // we delete the recipes dupplicates
+      const recipesWithoutDuplicates = [...new Set(arrayRecipes)];
+      displayRecipes(recipesWithoutDuplicates);
+    }
+  });
+}
+
+// we display the recipes in the HTML list
+function displayRecipes(recipesWithoutDuplicates) {
+  const main = document.querySelector("main");
+  main.innerHTML = "";
+  for (let i = 0; i < recipesWithoutDuplicates.length; i++) {
+    const article = document.createElement("article");
+    article.classList.add("recipe__card");
+    article.innerHTML += `
+    <div class = 'fake__image' > </div>
+    <div class = 'recipe__body'> 
+
+    <div class = 'recipe__header'>
+    <h1 class = "recipe__title"> ${recipesWithoutDuplicates[i].name} </h1>
+    <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
+      recipesWithoutDuplicates[i].time
+    } min </span>
+</div>
+<div class = "recipe__preparation">
+<ul>
+${recipesWithoutDuplicates[i].ingredients
+  .map(
+    (ingredient) =>
+      `<li>  
+     <span class = "ingredient__name">  ${ingredient.ingredient}  </span>   
+    <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
+    <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
+    </li>`
+  )
+  .join("")}
+
+</ul>
+<p class = "recipe__ingredients">
+${recipesWithoutDuplicates[i].description}
+</p>
+</div>
+</div>
+    `;
+    main.appendChild(article);
+  }
+}
