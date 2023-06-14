@@ -1,4 +1,5 @@
 // Function to call the API asynchronously
+let AllRecipes = [];
 async function displayInformations() {
   const response = await fetch("recipes.json", Headers);
 
@@ -9,6 +10,14 @@ async function displayInformations() {
   const data = await response.json();
   return data;
 }
+
+// Tu as toujours ton AllRecipes qui contient toutes les recettes
+const filteredRecipes = []
+// FilterdRecipes est un tableau qui va contenir une copie de AllRecipes
+// Lorsque tu dois filtrer et du coup afficher sur le DOM, c'est sur FilteredRecipes que tu dois travailler
+
+// Lorsque tu ajoutes un tag > Tu filtre et tu mets à jour filteredRecipes
+// Tu peux donc à nouveau parcourir filteredRecipes pour afficher les tags mis à jour
 
 // Function to display the recipes with their titles, time and ingredients
 displayInformations().then((data) => {
@@ -459,6 +468,14 @@ function updateIngredientsList(ingredient) {
   // to make sure that the string is strictly equal to arrays items
   const ingredientStringified = ingredient.trim().toString();
   // we loopp through the JSON Data File and the nested arrays
+
+  // A l'ajout d'un tag
+  // Search in filteredRecipes > Tu mets à jour filteredRecipes
+
+  // A la suppression d'un tag
+  // Tu fais la recherches dans ton tableau original et tu mets à jour filteredRecipes
+    // Tu vérifie dans nestedIngredientsArray ce qui est présent et tu effectues une nouvelles recherches
+
   displayInformations().then((data) => {
     for (recipe of data.recipes) {
       nestedIngredientsArray.push(
@@ -486,12 +503,38 @@ function updateIngredientsList(ingredient) {
 
 
 
-function updateAppliancesList(ingredient){
-  console.log(ingredient);
+function updateAppliancesList(ingredientSelected) {
+  // we prepare an empty array to push the appliances
+  // that correspond to the ingredient selected
+  const arrayAppliances = [];
+  // We erase the space at the beginning and at the end of the string
+  // and we convert the string into a string
+  // to make sure that the string is strictly equal to arrays items
+  const ingredientStringified = ingredientSelected.trim().toString();
 
+  // we loopp through the JSON Data File
+  // to check if the ingredient selected is present in the recipes
   displayInformations().then((data) => {
     for (recipe of data.recipes) {
-      console.log(recipe);
-    }})
-
+      const ArrayMapped = recipe.ingredients.map(
+        (ingredient) => ingredient.ingredient
+      );
+      // if the ingredient selected is present in the recipes
+      // we push the appliance in the empty array
+      if (ArrayMapped.includes(ingredientStringified)) {
+        arrayAppliances.push(recipe.appliance);
+      }
+      // we delete the appliances dupplicates and we sort the array alphabetically
+      const appliancesWithoutDuplicates = [...new Set(arrayAppliances)].sort();
+      displayAppliances(appliancesWithoutDuplicates);
+    }
+  });
 }
+
+// we display the appliances in the HTML list
+  function displayAppliances(appliancesWithoutDuplicates){
+   listAppliances.innerHTML = "";
+   for (let i = 0; i < appliancesWithoutDuplicates.length; i++) {
+     listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicates[i]} </li>`;
+   }
+  } 
