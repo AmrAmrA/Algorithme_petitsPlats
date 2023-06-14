@@ -497,6 +497,7 @@ function updateIngredientsList(ingredient) {
     }
   });
   updateAppliancesList(ingredient) // Argument
+  updateUstensilsList(ingredient) // Argument
 }
 
 
@@ -538,3 +539,43 @@ function updateAppliancesList(ingredientSelected) {
      listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicates[i]} </li>`;
    }
   } 
+
+
+  function updateUstensilsList (ingredientSelected) {
+    // we prepare an empty array to push the ustensils
+    // that correspond to the ingredient selected
+    const arrayUstensils = [];
+    // We erase the space at the beginning and at the end of the string
+    // and we convert the string into a string
+    // to make sure that the string is strictly equal to arrays items
+    const ingredientStringified = ingredientSelected.trim().toString();
+  
+    // we loopp through the JSON Data File
+    // to check if the ingredient selected is present in the recipes
+    displayInformations().then((data) => {
+      for (recipe of data.recipes) {
+        const ArrayMapped = recipe.ingredients.map(
+          (ingredient) => ingredient.ingredient
+        );
+        // if the ingredient selected is present in the recipes
+        // we push the ustensil in the empty array
+        if (ArrayMapped.includes(ingredientStringified)) {
+          arrayUstensils.push(recipe.ustensils);
+        }
+        // we sort the array alphabetically and flat the nested arrays
+        const ustensilsflattered = arrayUstensils.sort().flat();
+        
+        // we delete the ustensils dupplicates
+        const ustensilsWithoutDuplicates =[...new Set(ustensilsflattered)];
+        displayUstensils(ustensilsWithoutDuplicates);
+      }
+    });
+  }
+
+  // we display the ustensils in the HTML list
+  function displayUstensils(ustensilsWithoutDuplicates){
+    listUstensils.innerHTML = "";
+    for (let i = 0; i < ustensilsWithoutDuplicates.length; i++) {
+      listUstensils.innerHTML += `<li class = "ustensilItem"> ${ustensilsWithoutDuplicates[i]} </li>`;
+    }
+  }
