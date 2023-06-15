@@ -145,6 +145,12 @@ displayInformations().then((data) => {
         }
       }
     } else {
+      const listIngredients = document.querySelector(".listIngredients");
+      listIngredients.innerHTML = "";
+      const listAppliances = document.querySelector(".listAppliances");
+      listAppliances.innerHTML = "";
+      const listUstensils = document.querySelector(".listUstensils");
+      listUstensils.innerHTML = "";
       fillIngredientsList();
       fillAppliancesList();
       fillUstensilsList();
