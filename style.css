@@ -359,8 +359,8 @@ body {
     text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow-y: hidden; 
+    height: 170px;
   }
   .ingredient__name {
     font-weight: 700;
