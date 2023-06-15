@@ -105,6 +105,9 @@ displayInformations().then((data) => {
           oneRecipe.ustensils.includes(inputValue) ||
           IngredientsArray.includes(inputValue)
         ) {
+          updateIngredientsList(inputValue);
+          updateAppliancesList(inputValue);
+          updateUstensilsList(inputValue);
           main.appendChild(article);
           article.innerHTML = `
         <div class = 'fake__image' > </div>
