@@ -145,6 +145,9 @@ displayInformations().then((data) => {
         }
       }
     } else {
+      fillIngredientsList();
+      fillAppliancesList();
+      fillUstensilsList();
       for (const recipe of data.recipes) {
         function createRecipes() {
           const article = document.createElement("article");
@@ -298,92 +301,100 @@ labels.forEach((label) => {
 // use an empty array to store the ingredients items
 let arrayConcatedIngredients = [];
 // Loop through the JSON Data File to extract only the ingredients strings
-displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    appliancesArray = data.recipes[i].ingredients.map(
-      (item) => item.ingredient
-    );
-    arrayConcatedIngredients = arrayConcatedIngredients.concat(appliancesArray);
-  }
-  // We use lowercase in every item of the array in first time ...
-  function lowerCaseTheItem(arrayConcatedIngredients) {
-    const arrayLowercase = [];
-    arrayConcatedIngredients.forEach((ingredientsItems) => {
-      const arrayIngredientsLowerCase = ingredientsItems.toLowerCase();
-      arrayLowercase.push(arrayIngredientsLowerCase);
-    });
-    // ... and then we remove the duplicates,
-    // and we sort the array alphabetically
-    // finally we display the items in the list
-    const arraySorted = [...new Set(arrayLowercase)];
-    arraySorted.sort((a, b) => a.localeCompare(b));
-    arraySorted.forEach((ingredientsItems) => {
-      listIngredients.innerHTML += `<li class = "ingredientItem"> ${
-        ingredientsItems.charAt(0).toUpperCase() + ingredientsItems.slice(1)
-      } </li>`;
-    });
-  }
-  lowerCaseTheItem(arrayConcatedIngredients);
-});
+function fillIngredientsList() {
+  displayInformations().then((data) => {
+    for (let i = 0; i < data.recipes.length; i++) {
+      appliancesArray = data.recipes[i].ingredients.map(
+        (item) => item.ingredient
+      );
+      arrayConcatedIngredients =
+        arrayConcatedIngredients.concat(appliancesArray);
+    }
+    // We use lowercase in every item of the array in first time ...
+    function lowerCaseTheItem(arrayConcatedIngredients) {
+      const arrayLowercase = [];
+      arrayConcatedIngredients.forEach((ingredientsItems) => {
+        const arrayIngredientsLowerCase = ingredientsItems.toLowerCase();
+        arrayLowercase.push(arrayIngredientsLowerCase);
+      });
+      // ... and then we remove the duplicates,
+      // and we sort the array alphabetically
+      // finally we display the items in the list
+      const arraySorted = [...new Set(arrayLowercase)];
+      arraySorted.sort((a, b) => a.localeCompare(b));
+      arraySorted.forEach((ingredientsItems) => {
+        listIngredients.innerHTML += `<li class = "ingredientItem"> ${
+          ingredientsItems.charAt(0).toUpperCase() + ingredientsItems.slice(1)
+        } </li>`;
+      });
+    }
+    lowerCaseTheItem(arrayConcatedIngredients);
+  });
+}
+fillIngredientsList();
 
 // use an empty array to store the appliances items
 let arrayConcatedAppliances = [];
-// Loop through the JSON Data File to extract only the appliances strings
-displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    appliancesArray = data.recipes[i].appliance;
-    arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
-  }
-  // We use lowercase in every item of the array in first time ...
-  function lowerCaseTheItem(arrayConcatedAppliances) {
-    const arrayLowercase = [];
-    arrayConcatedAppliances.forEach((appliancesItems) => {
-      const arrayApplianceLowerCase = appliancesItems.toLowerCase();
-      arrayLowercase.push(arrayApplianceLowerCase);
-    });
-    // ... and then we remove the duplicates,
-    // and we sort the array alphabetically
-    // finally we display the items in the list
-    const arraySorted = [...new Set(arrayLowercase)];
-    arraySorted.sort((a, b) => a.localeCompare(b));
-    arraySorted.forEach((appliancesItems) => {
-      listAppliances.innerHTML += `<li> ${
-        appliancesItems.charAt(0).toUpperCase() + appliancesItems.slice(1)
-      } </li>`;
-    });
-  }
-  lowerCaseTheItem(arrayConcatedAppliances);
-});
+function fillAppliancesList() {
+  // Loop through the JSON Data File to extract only the appliances strings
+  displayInformations().then((data) => {
+    for (let i = 0; i < data.recipes.length; i++) {
+      appliancesArray = data.recipes[i].appliance;
+      arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
+    }
+    // We use lowercase in every item of the array in first time ...
+    function lowerCaseTheItem(arrayConcatedAppliances) {
+      const arrayLowercase = [];
+      arrayConcatedAppliances.forEach((appliancesItems) => {
+        const arrayApplianceLowerCase = appliancesItems.toLowerCase();
+        arrayLowercase.push(arrayApplianceLowerCase);
+      });
+      // ... and then we remove the duplicates,
+      // and we sort the array alphabetically
+      // finally we display the items in the list
+      const arraySorted = [...new Set(arrayLowercase)];
+      arraySorted.sort((a, b) => a.localeCompare(b));
+      arraySorted.forEach((appliancesItems) => {
+        listAppliances.innerHTML += `<li> ${
+          appliancesItems.charAt(0).toUpperCase() + appliancesItems.slice(1)
+        } </li>`;
+      });
+    }
+    lowerCaseTheItem(arrayConcatedAppliances);
+  });
+}
+fillAppliancesList();
 
 // use an empty array to store the ustensils items
 let arrayConcatedUstensils = [];
 // Loop through the JSON Data File to extract only the utensil strings
-displayInformations().then((data) => {
-  for (let i = 0; i < data.recipes.length; i++) {
-    ustensilsArray = data.recipes[i].ustensils;
-    arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
-  }
-  // We use lowercase in every item of the array in first time ...
-  function lowerCaseTheItem(arrayConcatedUstensils) {
-    const arrayLowercase = [];
-    arrayConcatedUstensils.forEach((ustensilsItems) => {
-      const arrayUstensilLowerCase = ustensilsItems.toLowerCase();
-      arrayLowercase.push(arrayUstensilLowerCase);
-    });
-    // ... and then we remove the duplicates,
-    // and we sort the array alphabetically
-    // finally we display the items in the list
-    const arraySorted = [...new Set(arrayLowercase)];
-    arraySorted.sort((a, b) => a.localeCompare(b));
-    arraySorted.forEach((ustensilsItems) => {
-      listUstensils.innerHTML += `<li> ${
-        ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)
-      } </li>`;
-    });
-  }
-  lowerCaseTheItem(arrayConcatedUstensils);
-});
-
+function fillUstensilsList() {
+  displayInformations().then((data) => {
+    for (let i = 0; i < data.recipes.length; i++) {
+      ustensilsArray = data.recipes[i].ustensils;
+      arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
+    }
+    // We use lowercase in every item of the array in first time ...
+    function lowerCaseTheItem(arrayConcatedUstensils) {
+      const arrayLowercase = [];
+      arrayConcatedUstensils.forEach((ustensilsItems) => {
+        const arrayUstensilLowerCase = ustensilsItems.toLowerCase();
+        arrayLowercase.push(arrayUstensilLowerCase);
+      });
+      // ... and then we remove the duplicates,
+      // and we sort the array alphabetically
+      // finally we display the items in the list
+      const arraySorted = [...new Set(arrayLowercase)];
+      arraySorted.sort((a, b) => a.localeCompare(b));
+      arraySorted.forEach((ustensilsItems) => {
+        listUstensils.innerHTML += `<li> ${
+          ustensilsItems.charAt(0).toUpperCase() + ustensilsItems.slice(1)
+        } </li>`;
+      });
+    }
+    lowerCaseTheItem(arrayConcatedUstensils);
+  })};
+fillUstensilsList();
 // Searching in the input field of every label
 
 // For Devices(or appliances) labels
