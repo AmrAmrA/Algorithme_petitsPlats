@@ -15,9 +15,6 @@ const init = async () => {
 
   await fillUstensilsList();
 
-  await searchByIngredientsButton();
-
-  await updateIngredientsList(); 
 };
 init();
 
@@ -105,7 +102,7 @@ const queryInput = document.querySelector(".query__input");
 
 async function checkInputValue() {
   const main = document.querySelector("main");
-   queryInput.addEventListener("keyup", (e) => {
+  queryInput.addEventListener("keyup", (e) => {
     main.innerHTML = "";
     const inputValue = e.target.value.toLowerCase().trim();
     if (LatestArrayVersion.includes(inputValue)) {
@@ -170,9 +167,8 @@ async function checkInputValue() {
             `;
         }
       }
-    }
-    else {
-      fillTheDom(); 
+    } else {
+      fillTheDom();
     }
   });
 }
@@ -286,7 +282,7 @@ labels.forEach((label) => {
 // use an empty array to store the ingredients items
 let arrayConcatedIngredients = [];
 // Loop through the JSON Data File to extract only the ingredients strings
-async function fillIngredientsList() {
+ async function fillIngredientsList() {
     for (let i = 0; i < dataArray.length; i++) {
       appliancesArray = dataArray[i].ingredients.map(
         (item) => item.ingredient
@@ -318,7 +314,7 @@ async function fillIngredientsList() {
 
 // use an empty array to store the appliances items
 let arrayConcatedAppliances = [];
-async function fillAppliancesList() {
+ async function fillAppliancesList() {
   // Loop through the JSON Data File to extract only the appliances strings
     for (let i = 0; i < dataArray.length; i++) {
       appliancesArray = dataArray[i].appliance;
@@ -344,14 +340,14 @@ async function fillAppliancesList() {
     }
     lowerCaseTheItem(arrayConcatedAppliances);
 }
-
+;
 
 
 
 // use an empty array to store the ustensils items
 let arrayConcatedUstensils = [];
 // Loop through the JSON Data File to extract only the utensil strings
-async function fillUstensilsList() {
+  async function fillUstensilsList() {
   
     for (let i = 0; i < dataArray.length; i++) {
       ustensilsArray = dataArray[i].ustensils;
@@ -376,8 +372,7 @@ async function fillUstensilsList() {
       });
     }
     lowerCaseTheItem(arrayConcatedUstensils);
-};
-
+}; 
 
   // // Searching in the input field of every label
 
@@ -431,7 +426,7 @@ const badgeSelectedIngredients = document.querySelector(
 const ingredienText = document.querySelector(".ingredients__span");
 // Select with the click the item in the list
 
- async function searchByIngredientsButton() {
+  function searchByIngredientsButton() {
   const ingredientsItems = document.querySelectorAll(".listIngredients li");
   // When we click on the item it creates a badge with the item name
   // at the same time the item becomes unclickable
@@ -463,7 +458,7 @@ const ingredienText = document.querySelector(".ingredients__span");
 
 const nestedIngredientsArray = []; 
 const IngredientsWithoutDuplicates = [];
- async function updateIngredientsList(ingredient) {
+function updateIngredientsList(ingredient) {
   // We erase the space at the beginning and at the end of the string
   // and we convert the string into a string
   // to make sure that the string is strictly equal to arrays items
@@ -533,7 +528,7 @@ function displayAppliances(appliancesWithoutDuplicates) {
   }
 }
 
-function updateUstensilsList(ingredientSelected) {
+ function updateUstensilsList(ingredientSelected) {
   // we prepare an empty array to push the ustensils
   // that correspond to the ingredient selected
   const arrayUstensils = [];
@@ -570,7 +565,7 @@ function displayUstensils(ustensilsWithoutDuplicates) {
   }
 }
 
-function updateDOM(ingredientSelected) {
+ function updateDOM(ingredientSelected) {
   // we prepare an empty array to push the recipes
   // that correspond to the ingredient selected
   const arrayRecipes = [];
