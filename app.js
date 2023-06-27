@@ -15,6 +15,8 @@ const init = async () => {
 
   await fillUstensilsList();
 
+  await searchByIngredientsButton();
+
 };
 init();
 
@@ -281,15 +283,11 @@ labels.forEach((label) => {
 
 // use an empty array to store the ingredients items
 let arrayConcatedIngredients = [];
-// Loop through the JSON Data File to extract only the ingredients strings
+// Loop through DataArray to extract only the ingredients strings
  async function fillIngredientsList() {
-    for (let i = 0; i < dataArray.length; i++) {
-      appliancesArray = dataArray[i].ingredients.map(
-        (item) => item.ingredient
-      );
-      arrayConcatedIngredients =
-        arrayConcatedIngredients.concat(appliancesArray);
-    }
+    for (const dataElement of dataArray) {
+      appliancesArray = dataElement.ingredients.map((item) => item.ingredient);
+      arrayConcatedIngredients = arrayConcatedIngredients.concat(appliancesArray);}
     // We use lowercase in every item of the array in first time ...
     function lowerCaseTheItem(arrayConcatedIngredients) {
       const arrayLowercase = [];
@@ -316,8 +314,8 @@ let arrayConcatedIngredients = [];
 let arrayConcatedAppliances = [];
  async function fillAppliancesList() {
   // Loop through the JSON Data File to extract only the appliances strings
-    for (let i = 0; i < dataArray.length; i++) {
-      appliancesArray = dataArray[i].appliance;
+    for (const dataElement of dataArray) {
+      appliancesArray = dataElement.appliance;
       arrayConcatedAppliances = arrayConcatedAppliances.concat(appliancesArray);
     }
     // We use lowercase in every item of the array in first time ...
@@ -339,8 +337,7 @@ let arrayConcatedAppliances = [];
       });
     }
     lowerCaseTheItem(arrayConcatedAppliances);
-}
-;
+};
 
 
 
@@ -349,8 +346,8 @@ let arrayConcatedUstensils = [];
 // Loop through the JSON Data File to extract only the utensil strings
   async function fillUstensilsList() {
   
-    for (let i = 0; i < dataArray.length; i++) {
-      ustensilsArray = dataArray[i].ustensils;
+    for (const dataElement of dataArray) {
+      ustensilsArray = dataElement.ustensils;
       arrayConcatedUstensils = arrayConcatedUstensils.concat(ustensilsArray);
     }
     // We use lowercase in every item of the array in first time ...
@@ -381,7 +378,7 @@ devicesInput.addEventListener("input", (e) => {
   const devicesInputValue = e.target.value.toLowerCase();
   const appliancesLI = document.querySelectorAll(".listAppliances li");
   appliancesLI.forEach((item) => {
-    if (item.textContent.toLowerCase().includes(devicesInputValue)) {
+    if (item.textContent.toLowerCase().trim().includes(devicesInputValue)) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
@@ -393,11 +390,7 @@ ingredientsInput.addEventListener("input", (e) => {
   const ingredientsInputValue = e.target.value.toLowerCase();
   const ingredientsLI = document.querySelectorAll(".listIngredients li");
   ingredientsLI.forEach((item) => {
-    if (item.textContent.toLowerCase().includes(ingredientsInputValue)) {
-      item.style.display = "block";
-    } else {
-      item.style.display = "none";
-    }
+    item.style.display = item.textContent.toLowerCase().trim().includes(ingredientsInputValue) ? "block" : "none";
   });
 });
 // For Ustensils labels
@@ -405,7 +398,7 @@ ustensilsInput.addEventListener("input", (e) => {
   const ustensilsInputValue = e.target.value.toLowerCase();
   const ustensilsLI = document.querySelectorAll(".listUstensils li");
   ustensilsLI.forEach((item) => {
-    if (item.textContent.toLowerCase().includes(ustensilsInputValue)) {
+    if (item.textContent.toLowerCase().trim().includes(ustensilsInputValue)) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
@@ -426,34 +419,35 @@ const badgeSelectedIngredients = document.querySelector(
 const ingredienText = document.querySelector(".ingredients__span");
 // Select with the click the item in the list
 
-  function searchByIngredientsButton() {
-  const ingredientsItems = document.querySelectorAll(".listIngredients li");
-  // When we click on the item it creates a badge with the item name
-  // at the same time the item becomes unclickable
-  ingredientsItems.forEach((ingredientItem) => {
-    ingredientItem.addEventListener("click", () => {
-      ingredientItem.style.pointerEvents = "none";
+  async function searchByIngredientsButton() {
+    const ingredientsItems = document.querySelectorAll(".listIngredients li");
+    // When we click on the item it creates a badge with the item name
+    // at the same time the item becomes unclickable
+    ingredientsItems.forEach((ingredientItem) => {
+      ingredientItem.addEventListener("click", () => {
+        ingredientItem.style.pointerEvents = "none";
 
-      // Update ingredientsItems List
-      updateIngredientsList(ingredientItem.outerText); // Argument
-      const ingredientSpan = ingredientItem;
-      // Creation of the badge
-      badgeSelected.innerHTML += `<div class="badge__selected__setup">
+        // Update ingredientsItems List
+        updateIngredientsList(ingredientItem.outerText); // Argument
+        const ingredientSpan = ingredientItem;
+        // Creation of the badge
+        badgeSelected.innerHTML += `<div class="badge__selected__setup">
             <span class="ingredients__span">${ingredientSpan.textContent}</span>
             <i class="fa-regular fa-circle-xmark close__item"></i>
             </div>
             `;
-      const closeItems = document.querySelectorAll(".close__item");
-      const allSelectedItems = document.querySelectorAll(".selected__item");
-      closeItems.forEach((closeItem) => {
-        closeItem.addEventListener("click", () => {
-          closeItem.parentNode.style.display = "none";
-          ingredientItem.style.pointerEvents = "auto";
+        const closeItems = document.querySelectorAll(".close__item");
+        const allSelectedItems = document.querySelectorAll(".selected__item");
+        closeItems.forEach((closeItem) => {
+          closeItem.addEventListener("click", () => {
+            closeItem.parentNode.style.display = "none";
+            ingredientItem.style.pointerEvents = "auto";
+          });
         });
       });
     });
-  });
-}
+  }
+
 
 
 const nestedIngredientsArray = []; 
@@ -478,9 +472,9 @@ function updateIngredientsList(ingredient) {
     }
     // we delete the duplicates and we sort the array alphabetically
     // finally we display the items in the HTML list
-    for (let i = 0; i < nestedIngredientsArray.length; i++) {
-      if (nestedIngredientsArray[i].includes(ingredientStringified)) {
-        IngredientsWithoutDuplicates.push(nestedIngredientsArray[i]);
+    for (const nestedIngredientsElement of nestedIngredientsArray) {
+      if (nestedIngredientsElement.includes(ingredientStringified)) {
+        IngredientsWithoutDuplicates.push(nestedIngredientsElement);
         const arrayFlattened = IngredientsWithoutDuplicates.flat();
         const newArray = [...new Set(arrayFlattened)].sort();
         listIngredients.innerHTML = "";
@@ -523,8 +517,8 @@ function updateAppliancesList(ingredientSelected) {
 // we display the appliances in the HTML list
 function displayAppliances(appliancesWithoutDuplicates) {
   listAppliances.innerHTML = "";
-  for (let i = 0; i < appliancesWithoutDuplicates.length; i++) {
-    listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicates[i]} </li>`;
+  for (const appliancesWithoutDuplicate of appliancesWithoutDuplicates) {
+    listAppliances.innerHTML += `<li class = "applianceItem"> ${appliancesWithoutDuplicate} </li>`;
   }
 }
 
@@ -560,8 +554,8 @@ function displayAppliances(appliancesWithoutDuplicates) {
 // we display the ustensils in the HTML list
 function displayUstensils(ustensilsWithoutDuplicates) {
   listUstensils.innerHTML = "";
-  for (let i = 0; i < ustensilsWithoutDuplicates.length; i++) {
-    listUstensils.innerHTML += `<li class = "ustensilItem"> ${ustensilsWithoutDuplicates[i]} </li>`;
+  for (const ustensilsWithoutDuplicate of ustensilsWithoutDuplicates) {
+    listUstensils.innerHTML += `<li class = "ustensilItem"> ${ustensilsWithoutDuplicate} </li>`;
   }
 }
 
@@ -591,11 +585,12 @@ function displayUstensils(ustensilsWithoutDuplicates) {
     };
 }
 
+
 // we display the recipes in the HTML list
 function displayRecipes(recipesWithoutDuplicates) {
   const main = document.querySelector("main");
   main.innerHTML = "";
-  for (let i = 0; i < recipesWithoutDuplicates.length; i++) {
+  for (const recipesWithoutDuplicate of recipesWithoutDuplicates) {
     const article = document.createElement("article");
     article.classList.add("recipe__card");
     article.innerHTML += `
@@ -603,14 +598,14 @@ function displayRecipes(recipesWithoutDuplicates) {
     <div class = 'recipe__body'> 
 
     <div class = 'recipe__header'>
-    <h1 class = "recipe__title"> ${recipesWithoutDuplicates[i].name} </h1>
+    <h1 class = "recipe__title"> ${recipesWithoutDuplicate.name} </h1>
     <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
-      recipesWithoutDuplicates[i].time
+      recipesWithoutDuplicate.time
     } min </span>
 </div>
 <div class = "recipe__preparation">
 <ul>
-${recipesWithoutDuplicates[i].ingredients
+${recipesWithoutDuplicate.ingredients
   .map(
     (ingredient) =>
       `<li>  
@@ -623,7 +618,7 @@ ${recipesWithoutDuplicates[i].ingredients
 
 </ul>
 <p class = "recipe__ingredients">
-${recipesWithoutDuplicates[i].description}
+${recipesWithoutDuplicate.description}
 </p>
 </div>
 </div>
