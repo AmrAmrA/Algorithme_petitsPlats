@@ -15,8 +15,6 @@ const init = async () => {
 
   await fillUstensilsList();
 
-  await searchByIngredientsButton();
-
 };
 init();
 
@@ -48,35 +46,23 @@ async function fillTheDom() {
                 <div class = 'fake__image' > </div>
                 <div class = 'recipe__body'> 
                     <div class = 'recipe__header'>
-                        <h1 class = "recipe__title"> ${recipe.name} </h1>
-                        <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
-                          recipe.time
-                        } min </span>
+                      <h1 class = "recipe__title"> ${recipe.name} </h1>
+                      <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${recipe.time} min </span>
                     </div>
-                    <div class = "recipe__preparation">
+                      <div class = "recipe__preparation">
                      <ul>
-                        ${recipe.ingredients
-                          .map(
-                            (ingredient) =>
+                        ${recipe.ingredients.map((ingredient) =>
                               `<li>  
-                                <span class = "ingredient__name">  ${
-                                  ingredient.ingredient
-                                } </span>   
-                                <span> : ${
-                                  ingredient.quantity ? ingredient.quantity : ""
-                                } </span> 
-                                <span>  ${
-                                  ingredient.unit ? ingredient.unit : ""
-                                } </span>
-                            </li>`
-                          )
-                          .join("")}
+                                <span class = "ingredient__name">  ${ingredient.ingredient} </span>   
+                                <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
+                                <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
+                              </li>`
+                          ).join("")}
                      </ul>
                      <p class = "recipe__ingredients">${recipe.description}</p>
-                    </div>
+                     </div>
                 </div>
-                `;
-  }
+                `;}
 }
 
 const emptyArray = [];
@@ -107,7 +93,7 @@ async function checkInputValue() {
   queryInput.addEventListener("keyup", (e) => {
     main.innerHTML = "";
     const inputValue = e.target.value.toLowerCase().trim();
-    if (LatestArrayVersion.includes(inputValue)) {
+    if (inputValue.length >= 3 &&  LatestArrayVersion.includes(inputValue)) {
       for (const recipe of dataArray) {
         const article = document.createElement("article");
         article.classList.add("recipe__card");
@@ -123,11 +109,8 @@ async function checkInputValue() {
         IngredientsArray = IngredientsArray.map((ingredient) =>
           ingredient.toLowerCase()
         );
-        if (
-          recipe.appliance === inputValue ||
-          recipe.ustensils.includes(inputValue) ||
-          IngredientsArray.includes(inputValue)
-        ) {
+        if (recipe.appliance === inputValue ||recipe.ustensils.includes(inputValue) ||IngredientsArray.includes(inputValue))  
+        {
           updateIngredientsList(inputValue);
           updateAppliancesList(inputValue);
           updateUstensilsList(inputValue);
@@ -143,27 +126,15 @@ async function checkInputValue() {
                 </div>
                 <div class = "recipe__preparation">
                  <ul>
-                    ${recipe.ingredients
-                      .map(
-                        (ingredient) =>
+                    ${recipe.ingredients.map((ingredient) =>
                           `<li>  
-                         <span class = "ingredient__name">  ${
-                           ingredient.ingredient
-                         }  </span>   
-                        <span> : ${
-                          ingredient.quantity ? ingredient.quantity : ""
-                        } </span> 
-                        <span>  ${
-                          ingredient.unit ? ingredient.unit : ""
-                        } </span>
+                              <span class = "ingredient__name">  ${ingredient.ingredient}  </span>   
+                              <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
+                              <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
                         </li>`
-                      )
-                      .join("")}
-                    
+                      ).join("")}         
                  </ul>
-                 <p class = "recipe__ingredients">
-                 ${recipe.description}
-                 </p>
+                 <p class = "recipe__ingredients"> ${recipe.description} </p>
                 </div>
             </div>
             `;
@@ -419,7 +390,7 @@ const badgeSelectedIngredients = document.querySelector(
 const ingredienText = document.querySelector(".ingredients__span");
 // Select with the click the item in the list
 
-  async function searchByIngredientsButton() {
+   function searchByIngredientsButton() {
     const ingredientsItems = document.querySelectorAll(".listIngredients li");
     // When we click on the item it creates a badge with the item name
     // at the same time the item becomes unclickable
@@ -447,7 +418,7 @@ const ingredienText = document.querySelector(".ingredients__span");
       });
     });
   }
-
+  setTimeout(searchByIngredientsButton, 500);
 
 
 const nestedIngredientsArray = []; 
@@ -478,8 +449,8 @@ function updateIngredientsList(ingredient) {
         const arrayFlattened = IngredientsWithoutDuplicates.flat();
         const newArray = [...new Set(arrayFlattened)].sort();
         listIngredients.innerHTML = "";
-        for (let i = 0; i < newArray.length; i++) {
-          listIngredients.innerHTML += `<li class = "ingredientItem"> ${newArray[i]} </li>`;
+        for (const newElement of newArray) {
+          listIngredients.innerHTML += `<li class = "ingredientItem"> ${newElement} </li>`;
         }
       }
     };
@@ -597,22 +568,19 @@ function displayRecipes(recipesWithoutDuplicates) {
     <div class = 'fake__image' > </div>
     <div class = 'recipe__body'> 
 
-    <div class = 'recipe__header'>
-    <h1 class = "recipe__title"> ${recipesWithoutDuplicate.name} </h1>
-    <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${
-      recipesWithoutDuplicate.time
-    } min </span>
-</div>
+      <div class = 'recipe__header'>
+      <h1 class = "recipe__title"> ${recipesWithoutDuplicate.name} </h1>
+      <span class = "recipe__time"> <i class="fa-regular fa-clock recipe__clock"></i> ${recipesWithoutDuplicate.time} min </span>
+    </div>
 <div class = "recipe__preparation">
 <ul>
 ${recipesWithoutDuplicate.ingredients
-  .map(
-    (ingredient) =>
+  .map((ingredient) =>
       `<li>  
-     <span class = "ingredient__name">  ${ingredient.ingredient}  </span>   
-    <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
-    <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
-    </li>`
+        <span class = "ingredient__name">  ${ingredient.ingredient}  </span>   
+        <span> : ${ingredient.quantity ? ingredient.quantity : ""} </span> 
+        <span>  ${ingredient.unit ? ingredient.unit : ""} </span>
+     </li>`
   )
   .join("")}
 
